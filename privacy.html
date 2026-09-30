@@ -15,6 +15,7 @@
   <link rel="icon" type="image/png" href="assets/moods/excellent.png">
   <link rel="preload" href="assets/fonts/Nunito.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="legal.css">
+  <link rel="stylesheet" href="footer.css">
 </head>
 <body>
   <!--
@@ -42,6 +43,7 @@
       <nav class="header-nav" aria-label="Navegação legal">
         <a href="privacy.html" aria-current="page">Privacidade</a>
         <a href="terms.html">Termos</a>
+        <a href="contact.html">Contato</a>
         <a class="home-link" href="index.html">Voltar ao site</a>
       </nav>
     </div>
@@ -53,11 +55,11 @@
         <div>
           <h1 id="titulo">Política de Privacidade</h1>
           <p class="lead">Seu diário é pessoal. Esta política explica, sem rodeios, o que permanece no seu aparelho, quando informações podem ser enviadas ao Google e quais escolhas você tem.</p>
-          <p class="document-meta">Em vigor desde <time datetime="2026-09-09">9 de setembro de 2026</time></p>
+          <p class="document-meta">Em vigor desde <time datetime="2026-09-09">9 de setembro de 2026</time> · Atualizada em <time datetime="2026-09-29">29 de setembro de 2026</time></p>
         </div>
         <dl class="hero-ledger">
           <div><dt><svg aria-hidden="true"><use href="#icon-phone"/></svg></dt><dd>Seus registros ficam no dispositivo e não são enviados à iFlag.</dd></div>
-          <div><dt><svg aria-hidden="true"><use href="#icon-drive"/></svg></dt><dd>O arquivo de backup só vai ao Google Drive se você escolher esse destino.</dd></div>
+          <div><dt><svg aria-hidden="true"><use href="#icon-drive"/></svg></dt><dd>O arquivo de backup exportado só vai ao Google Drive se você escolher esse destino. Se o backup do Google estiver ativo no seu Android, o sistema também pode guardar uma cópia dos dados do app na sua Conta Google.</dd></div>
           <div><dt><svg aria-hidden="true"><use href="#icon-ad"/></svg></dt><dd>Serviços de anúncios podem tratar dados técnicos para exibição, medição e segurança.</dd></div>
         </dl>
       </div>
@@ -83,7 +85,7 @@
       <article class="legal-document">
         <aside class="plain-summary" aria-labelledby="resumo-titulo">
           <h2 id="resumo-titulo">Em poucas palavras</h2>
-          <p>Você não precisa criar uma conta no DailyBetter. O conteúdo do diário é armazenado localmente. Ao exportar um backup, você escolhe onde salvar ou compartilhar o arquivo, inclusive no Google Drive. O app exibe anúncios do Google AdMob, que pode tratar identificadores e dados técnicos conforme suas políticas.</p>
+          <p>Você não precisa criar uma conta no DailyBetter. O conteúdo do diário é armazenado localmente. Ao exportar um backup, você escolhe onde salvar ou compartilhar o arquivo, inclusive no Google Drive. Se o backup do Google estiver ativo no aparelho, o Android também pode incluir os dados do app na sua Conta Google. O app exibe anúncios do Google AdMob, que pode tratar identificadores e dados técnicos conforme suas políticas.</p>
         </aside>
 
         <section class="legal-section" id="quem-somos">
@@ -99,7 +101,7 @@
             <table class="data-table">
               <thead><tr><th>Fluxo</th><th>Dados envolvidos</th><th>Onde ficam</th></tr></thead>
               <tbody>
-                <tr><td>Diário local</td><td>Humor, notas e detalhes opcionais, como atividades, sono e energia.</td><td>No seu dispositivo. A iFlag não recebe esse conteúdo durante o uso normal do app.</td></tr>
+                <tr><td>Diário local</td><td>Humor, notas e detalhes opcionais, como atividades, sono e energia.</td><td>No seu dispositivo. A iFlag não recebe esse conteúdo durante o uso normal do app. Pode ser incluído no backup automático do Android na sua Conta Google, se ativado.</td></tr>
                 <tr><td>Backup</td><td>Arquivo JSON com registros de humor, notas, atividades, sono, energia, clima, sintomas, conquistas e desafios registrados.</td><td>Primeiro em área temporária do dispositivo; depois, somente no destino que você escolher no compartilhamento do Android, como o Google Drive.</td></tr>
                 <tr><td>Anúncios</td><td>Identificadores de publicidade ou do app, endereço IP, informações do dispositivo e do aplicativo, interações com anúncios e dados de diagnóstico ou prevenção a fraude, conforme a configuração do Google AdMob.</td><td>Podem ser tratados pelo Google e por parceiros de publicidade envolvidos na entrega do anúncio.</td></tr>
                 <tr><td>Suporte</td><td>Seu e-mail e as informações que você incluir voluntariamente na mensagem.</td><td>Na caixa de e-mail e nos sistemas necessários para responder à solicitação.</td></tr>
@@ -131,6 +133,8 @@
           <p>O backup é opcional. O DailyBetter cria um arquivo JSON e abre as opções de compartilhamento do Android. <strong>O app não faz login na sua Conta Google, não recebe sua senha e não solicita acesso direto ao seu Drive.</strong> O arquivo só é enviado ao Google Drive se você selecionar esse destino.</p>
           <p>O arquivo pode conter informações pessoais e sensíveis que você registrou. Ele não recebe uma camada adicional de criptografia do DailyBetter. Guarde-o em local confiável e evite compartilhá-lo com pessoas ou serviços que não deveriam acessar seu diário.</p>
           <p>Se você escolher o Drive, o envio e o armazenamento serão realizados pelos serviços do Android e do Google e ficarão sujeitos às configurações da sua Conta Google e à <a href="https://policies.google.com/privacy?hl=pt-BR" target="_blank" rel="noopener noreferrer">Política de Privacidade do Google</a>.</p>
+          <h3>Backup automático do Android</h3>
+          <p>O Android pode incluir os dados do DailyBetter, como o diário e as preferências, no backup automático do Google quando esse recurso estiver ativado no aparelho. Esse backup é feito pelo sistema Android na sua Conta Google, sem acesso da iFlag e sem login no app, e serve para restaurar o app ao configurar um novo aparelho ou reinstalá-lo. Você pode ativar ou desativar esse recurso nas configurações de backup do Android. Ele segue as regras e a <a href="https://policies.google.com/privacy?hl=pt-BR" target="_blank" rel="noopener noreferrer">Política de Privacidade do Google</a>.</p>
           <h3>Anúncios</h3>
           <p>O DailyBetter usa o Google AdMob para exibir banners e anúncios recompensados. O app solicita anúncios não personalizados e não envia ao SDK o conteúdo do diário, humor, notas, sono, atividades, sintomas ou identificadores fornecidos pelo usuário. O Google e, quando aplicável, seus parceiros ainda podem usar tecnologias como identificadores do aplicativo ou de publicidade, endereço IP e sinais do dispositivo para entregar anúncios, limitar repetições, gerar relatórios e prevenir fraude.</p>
           <p>Quando exigido, o app apresenta o fluxo de consentimento do Google antes de solicitar anúncios e oferece acesso às opções de privacidade aplicáveis. Você também pode revisar preferências na <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">Minha Central de Anúncios do Google</a> e nas configurações de privacidade ou anúncios do Android.</p>
@@ -147,7 +151,7 @@
             <li><strong>Dados de anúncios:</strong> são mantidos pelos provedores segundo suas políticas, configurações e obrigações legais.</li>
             <li><strong>Mensagens de suporte:</strong> são mantidas pelo tempo necessário para resolver a solicitação e, quando aplicável, cumprir obrigações ou resguardar direitos.</li>
           </ul>
-          <p>Como o diário fica localmente, a iFlag não consegue apagar à distância os registros que estão apenas no seu aparelho ou os arquivos que você salvou em serviços de terceiros.</p>
+          <p>Como o diário fica localmente, a iFlag não consegue apagar à distância os registros que estão apenas no seu aparelho ou os arquivos que você salvou em serviços de terceiros. A cópia feita pelo backup automático do Android é gerenciada nas configurações da sua Conta Google e do aparelho.</p>
         </section>
 
         <section class="legal-section" id="direitos">
@@ -158,6 +162,7 @@
             <li>editar ou apagar registros dentro do app;</li>
             <li>apagar os dados locais do aplicativo pelas configurações do Android;</li>
             <li>gerenciar ou excluir o arquivo de backup no Google Drive ou em qualquer outro destino escolhido;</li>
+            <li>desativar o backup automático do Android ou apagar a cópia nas configurações da sua Conta Google;</li>
             <li>ajustar as preferências de anúncios no Android e nos controles oferecidos pelo Google.</li>
           </ul>
           <p>Para dados que estejam sob nosso controle, envie sua solicitação para <a href="mailto:iflagdev@gmail.com">iflagdev@gmail.com</a>. Poderemos pedir informações mínimas para confirmar sua identidade e proteger seus dados. O exercício dos direitos é gratuito.</p>
@@ -192,20 +197,42 @@
   </main>
 
   <footer class="site-footer">
-    <div class="wrap footer-row">
-      <div>
-        <a class="brand-logo" href="index.html"><img src="assets/moods/excellent.png" alt="" width="32" height="32"><span>Daily<em>Better</em></span></a>
-        <p class="footer-copy">© 2026 DailyBetter. Desenvolvido por iFlag.</p>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand-logo" href="index.html" aria-label="DailyBetter, página inicial"><img src="assets/moods/excellent.png" alt="" width="36" height="36"><span>Daily<em>Better</em></span></a>
+          <p class="footer-tagline">Um espaço para todos os seus dias. Registre seu humor e conheça melhor o seu ritmo.</p>
+          <a class="footer-store" href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 15 9-15 9V3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m5 3 10 12m-10 6 10-12" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>Ver no Google Play</a>
+        </div>
+        <div class="footer-columns">
+          <nav class="footer-column" aria-labelledby="footer-produto">
+            <h2 id="footer-produto">Produto</h2>
+            <ul>
+              <li><a href="index.html#como-funciona">Como funciona</a></li>
+              <li><a href="index.html#seus-dias">Por dentro do app</a></li>
+              <li><a href="index.html#telas">Telas</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-column" aria-labelledby="footer-suporte">
+            <h2 id="footer-suporte">Suporte</h2>
+            <ul>
+              <li><a href="index.html#duvidas">Dúvidas</a></li>
+              <li><a href="contact.html">Contato</a></li>
+              <li><a href="mailto:iflagdev@gmail.com">E-mail</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-column" aria-labelledby="footer-legal">
+            <h2 id="footer-legal">Legal</h2>
+            <ul>
+              <li><a href="privacy.html" aria-current="page">Privacidade</a></li>
+              <li><a href="terms.html">Termos de Uso</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
-      <div class="footer-links">
-        <nav class="footer-nav" aria-label="Rodapé">
-          <a href="index.html">Página inicial</a>
-          <a href="mailto:iflagdev@gmail.com">Contato</a>
-        </nav>
-        <nav class="footer-legal" aria-label="Legal">
-          <a href="privacy.html" aria-current="page">Privacidade</a>
-          <a href="terms.html">Termos de Uso</a>
-        </nav>
+      <div class="footer-bottom">
+        <p>© 2026 DailyBetter. Todos os direitos reservados.</p>
+        <p>Desenvolvido por iFlag</p>
       </div>
     </div>
   </footer>

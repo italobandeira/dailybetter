@@ -43,23 +43,34 @@
       .button { @apply inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl px-6 py-3 font-extrabold transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0 motion-reduce:transform-none; }
       .button-primary { @apply button bg-brand text-[#332100]; }
       .button-dark { @apply button bg-charcoal text-white; }
-      .section-title { @apply text-[clamp(2.25rem,4.8vw,4.2rem)] font-black leading-[1.08] tracking-[-.035em]; }
+      .section-title { @apply text-[clamp(2rem,4.8vw+.5rem,4.2rem)] font-black leading-[1.08] tracking-[-.035em]; }
       .phone { @apply overflow-hidden rounded-[32px] border-[6px] border-[#33362E] bg-paper shadow-phone; }
       .phone img { @apply block h-auto w-full; }
       .feature-panel { @apply pb-10 sm:pb-12; }
       .feature-panel .phone { @apply max-w-full translate-y-0; }
       .cta-faces { @apply mx-auto w-fit items-center rounded-full bg-charcoal px-7 py-5; }
-      .mood-choice { @apply flex min-h-[82px] flex-1 flex-col items-center justify-center gap-2 rounded-2xl px-1 py-2 text-xs font-bold transition-colors hover:bg-white; }
+      .mood-choice { @apply flex min-h-[82px] min-w-0 flex-1 flex-col items-center justify-center gap-2 rounded-2xl px-0.5 py-2 text-[11px] font-bold transition-colors hover:bg-white sm:px-1 sm:text-xs; }
       .mood-choice[aria-pressed="true"] { @apply bg-white ring-2 ring-honey; }
-      .mood-choice img { @apply size-10 sm:size-12; }
+      .mood-choice img { @apply size-9 min-[380px]:size-10 sm:size-12; }
       .faq-item { @apply border-b border-ink/15 py-5; }
-      .faq-item summary { @apply flex min-h-12 cursor-pointer list-none items-center justify-between gap-5 text-lg font-extrabold; }
-      .faq-item p { @apply max-w-2xl pb-3 pr-10 pt-3 leading-relaxed text-muted; }
+      .faq-item summary { @apply flex min-h-12 cursor-pointer list-none items-center justify-between gap-5 text-base font-extrabold sm:text-lg; }
+      .faq-item p { @apply max-w-2xl pb-3 pt-3 leading-relaxed text-muted sm:pr-10; }
       .faq-item[open] .faq-plus { @apply rotate-45; }
       .theme-button { @apply min-h-11 rounded-full px-5 text-sm font-extrabold transition-colors; }
       .theme-button[aria-pressed="true"] { @apply bg-brand text-[#332100]; }
+      /* Full-bleed scroller whose first card lines up with .wrap content. */
+      .gallery-track { --edge: max(1.25rem, calc((100% - 1200px) / 2)); padding-inline: var(--edge); scroll-padding-inline: var(--edge); }
+      @media (min-width: 640px) { .gallery-track { --edge: max(2rem, calc((100% - 1200px) / 2)); } }
+      /* Thin, rounded scrollbar inset to the content width. */
+      .gallery-track::-webkit-scrollbar { height: 6px; }
+      .gallery-track::-webkit-scrollbar-track { margin-inline: max(1.25rem, calc(50vw - 600px)); /* % is not resolved inside scrollbar pseudos */ border-radius: 999px; background: rgb(41 43 38 / 7%); }
+      @media (min-width: 640px) { .gallery-track::-webkit-scrollbar-track { margin-inline: max(2rem, calc(50vw - 600px)); } }
+      .gallery-track::-webkit-scrollbar-thumb { border-radius: 999px; background: rgb(41 43 38 / 22%); }
+      .gallery-track::-webkit-scrollbar-thumb:hover { background: rgb(128 83 0 / 55%); }
+      @supports not selector(::-webkit-scrollbar) { .gallery-track { scrollbar-width: thin; scrollbar-color: rgb(41 43 38 / 25%) transparent; } }
     }
   </style>
+  <link rel="stylesheet" href="footer.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js" defer></script>
   <script src="main.js" defer></script>
@@ -101,23 +112,32 @@
           width="36" height="36"><span>Daily<span class="text-honey">Better</span></span></a>
       <nav class="hidden items-center gap-7 text-sm font-bold text-muted lg:flex" aria-label="Navegação principal"><a
           href="#como-funciona" class="hover:text-honey">Como funciona</a><a href="#seus-dias"
-          class="hover:text-honey">Por dentro do app</a><a href="#privacidade" class="hover:text-honey">Privacidade</a>
+          class="hover:text-honey">Por dentro do app</a><a href="#privacidade" class="hover:text-honey">Privacidade</a><a
+          href="contact.html" class="hover:text-honey">Contato</a>
       </nav>
-      <a href="#download"
-        class="hidden min-h-11 items-center gap-3 rounded-full bg-ink px-5 text-sm font-extrabold text-white sm:inline-flex">Conhecer
-        o app<svg class="size-4" aria-hidden="true">
-          <use href="#arrow" />
-        </svg></a>
-      <button id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"
-        class="grid size-12 place-items-center rounded-xl hover:bg-sage lg:hidden"><svg class="size-6"
-          aria-hidden="true">
-          <use href="#menu" />
-        </svg></button>
+      <div class="flex items-center gap-2">
+        <a href="#download"
+          class="hidden min-h-11 items-center gap-3 rounded-full bg-ink px-5 text-sm font-extrabold text-white sm:inline-flex">Conhecer
+          o app<svg class="size-4" aria-hidden="true">
+            <use href="#arrow" />
+          </svg></a>
+        <button id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"
+          class="-mr-3 grid size-12 place-items-center rounded-xl hover:bg-sage lg:hidden"><svg class="size-6"
+            aria-hidden="true">
+            <use href="#menu" />
+          </svg></button>
+      </div>
     </div>
-    <nav id="mobile-menu" class="wrap hidden border-t border-ink/10 pb-5 pt-3 lg:hidden" aria-label="Navegação móvel"><a
-        class="block py-3 font-bold" href="#como-funciona">Como funciona</a><a class="block py-3 font-bold"
-        href="#seus-dias">Por dentro do app</a><a class="block py-3 font-bold" href="#privacidade">Privacidade</a><a
-        class="block py-3 font-extrabold text-honey" href="#download">Conhecer o app</a></nav>
+    <nav id="mobile-menu" class="wrap hidden max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-ink/10 pb-5 pt-3 lg:hidden"
+      aria-label="Navegação móvel"><a class="flex min-h-12 items-center font-bold" href="#como-funciona">Como
+        funciona</a><a class="flex min-h-12 items-center font-bold" href="#seus-dias">Por dentro do app</a><a
+        class="flex min-h-12 items-center font-bold" href="#privacidade">Privacidade</a><a
+        class="flex min-h-12 items-center font-bold" href="#duvidas">Dúvidas</a><a
+        class="flex min-h-12 items-center font-bold" href="contact.html">Contato</a><a
+        class="mt-3 flex min-h-12 items-center justify-center gap-3 rounded-2xl bg-ink font-extrabold text-white sm:hidden"
+        href="#download">Conhecer o app<svg class="size-4" aria-hidden="true">
+          <use href="#arrow" />
+        </svg></a></nav>
   </header>
 
   <main id="conteudo">
@@ -126,7 +146,7 @@
       <div class="wrap grid items-center gap-12 lg:min-h-[600px] lg:grid-cols-[1.1fr_1fr] lg:gap-16">
         <div class="hero-copy relative z-10">
           <h1 id="hero-title"
-            class="max-w-[660px] text-[clamp(3rem,5.8vw,5.1rem)] font-black leading-[1.03] tracking-[-.04em]">Um espaço
+            class="max-w-[660px] text-[clamp(2.6rem,5.8vw+.6rem,5.1rem)] font-black leading-[1.03] tracking-[-.04em]">Um espaço
             para <span class="text-honey">todos</span> os seus dias.</h1>
           <p class="mt-6 max-w-[490px] text-lg leading-relaxed text-muted sm:text-xl">Os leves, os difíceis e os que
             passam no meio. Registre seu humor e conheça melhor o seu ritmo com o DailyBetter.</p>
@@ -146,7 +166,8 @@
                 <use href="#check" />
               </svg>Do seu jeito</span></div>
         </div>
-        <div class="hero-stage relative mx-auto h-[455px] w-full max-w-[480px] sm:h-[555px] lg:h-[600px]">
+        <div
+          class="hero-stage relative mx-auto aspect-[480/600] max-h-[600px] w-full max-w-[400px] sm:max-w-[460px] lg:max-w-[440px] xl:max-w-[480px]">
           <div class="absolute inset-x-0 bottom-10 top-10 rounded-[50%] bg-sage" aria-hidden="true"></div>
           <div class="hero-secondary phone absolute right-0 top-12 w-[46%] rotate-[9deg] sm:top-16"><img
               src="assets/screens/calendario.png"
@@ -175,7 +196,7 @@
     </section>
 
     <section id="como-funciona" class="bg-sage py-20 lg:py-28" aria-labelledby="how-title">
-      <div class="wrap grid items-center gap-12 lg:grid-cols-2 lg:gap-24">
+      <div class="wrap grid items-center gap-12 [&>*]:min-w-0 lg:grid-cols-2 lg:gap-24">
         <div>
           <h2 id="how-title" class="section-title">Tudo começa com<br>“como eu estou?”</h2>
           <p class="mt-6 max-w-lg text-lg leading-relaxed text-muted">Um check-in pode ser só uma carinha. E, quando
@@ -207,7 +228,7 @@
             </li>
           </ol>
         </div>
-        <div class="rounded-[28px] bg-paper p-5 sm:p-9">
+        <div class="min-w-0 rounded-[28px] bg-paper p-4 min-[380px]:p-5 sm:p-9">
           <div class="flex items-center justify-between text-xs font-bold text-muted"><span>Experimente uma
               escolha</span><span>Demonstração</span></div>
           <h3 class="mt-7 text-2xl font-black tracking-tight">Como você está agora?</h3>
@@ -241,17 +262,17 @@
           <p class="max-w-sm text-lg leading-relaxed text-muted">Com o tempo, os detalhes se encontram. Você começa a
             perceber o que faz parte dos seus dias.</p>
         </div>
-        <div class="mt-14 grid gap-6 lg:grid-cols-[1.1fr_.9fr]">
-          <article class="feature-panel overflow-hidden rounded-[28px] bg-[#EDEFE4] px-6 pt-8 sm:px-10 sm:pt-10">
-            <h3 class="text-3xl font-black tracking-[-.025em]">Seu mês tem muitas cores.</h3>
+        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:mt-14 lg:grid-cols-[1.1fr_.9fr]">
+          <article class="feature-panel overflow-hidden rounded-[28px] bg-[#EDEFE4] px-6 pt-8 sm:px-8 sm:pt-10 lg:px-10">
+            <h3 class="text-[1.75rem] font-black leading-tight tracking-[-.025em] sm:text-3xl">Seu mês tem muitas cores.</h3>
             <p class="mt-3 max-w-md leading-relaxed text-muted">Volte aos dias que passaram e veja como se sentiu. Seu
               calendário guarda os momentos bons e os difíceis.</p>
             <div class="phone mx-auto mt-9 w-[230px] translate-y-5 sm:w-[260px]"><img
                 src="assets/screens/calendario.png" alt="Calendário de humor do DailyBetter" width="1080" height="1920"
                 loading="lazy"></div>
           </article>
-          <article class="feature-panel overflow-hidden rounded-[28px] bg-[#F9E8C9] px-6 pt-8 sm:px-10 sm:pt-10">
-            <h3 class="text-3xl font-black tracking-[-.025em]">Perceba seu próprio ritmo.</h3>
+          <article class="feature-panel overflow-hidden rounded-[28px] bg-[#F9E8C9] px-6 pt-8 sm:px-8 sm:pt-10 lg:px-10">
+            <h3 class="text-[1.75rem] font-black leading-tight tracking-[-.025em] sm:text-3xl">Perceba seu próprio ritmo.</h3>
             <p class="mt-3 max-w-md leading-relaxed text-[#6C5634]">Gráficos semanais, mensais e um histórico visual
               ajudam a observar como seu humor varia.</p>
             <div class="phone mx-auto mt-9 w-[230px] translate-y-5 sm:w-[260px]"><img
@@ -281,7 +302,7 @@
 
     <section id="aparencia" class="overflow-hidden bg-charcoal py-20 text-[#F4F2E8] lg:py-28"
       aria-labelledby="theme-title">
-      <div class="wrap grid items-center gap-12 lg:grid-cols-[1fr_.85fr] lg:gap-24">
+      <div class="wrap grid items-center gap-12 md:grid-cols-[1fr_.85fr] md:gap-10 lg:gap-24">
         <div>
           <h2 id="theme-title" class="section-title">Bom de olhar.<br><span class="text-brand">Fácil de usar.</span>
           </h2>
@@ -300,9 +321,9 @@
         <div class="relative mx-auto w-full max-w-[355px]">
           <div class="absolute inset-x-[-20%] bottom-[15%] top-[15%] rounded-full bg-[#30352B]" aria-hidden="true">
           </div>
-          <div class="phone relative mx-auto w-[250px] rotate-[3deg] border-[#464A3F] sm:w-[275px]"><img
+          <div class="phone relative mx-auto w-[min(250px,70vw)] rotate-[3deg] border-[#464A3F] sm:w-[275px] md:w-[250px] lg:w-[275px]"><img
               id="theme-screen" src="assets/screens/modo-escuro.png" alt="Tela inicial no tema escuro" width="1080"
-              height="1920" loading="lazy"></div><img class="absolute -left-3 bottom-8 w-20 -rotate-12"
+              height="1920" loading="lazy"></div><img class="absolute -left-1 bottom-8 w-16 -rotate-12 sm:-left-3 sm:w-20"
             src="assets/moods/good.png" alt="" width="800" height="800" aria-hidden="true">
         </div>
       </div>
@@ -312,7 +333,7 @@
       <div class="wrap mb-10 flex items-end justify-between gap-5">
         <div>
           <h2 id="screens-title" class="section-title">Conheça seu próximo diário.</h2>
-          <p class="mt-5 max-w-xl text-lg text-muted">Telas reais do DailyBetter, com registros demonstrativos.</p>
+          <p class="mt-5 max-w-xl text-lg text-muted">Telas reais do DailyBetter, com registros demonstrativos.<span class="sm:hidden"> Deslize para ver mais.</span></p>
         </div>
         <div class="hidden shrink-0 gap-2 sm:flex"><button id="gallery-prev" type="button"
             class="grid size-12 place-items-center rounded-full border border-ink/20 disabled:opacity-30"
@@ -325,28 +346,28 @@
             </svg></button></div>
       </div>
       <div id="gallery" tabindex="0" aria-label="Galeria de telas; role para ver mais"
-        class="text-center wrap flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6 [scrollbar-color:#A6AC9B_#E7EBDD]">
-        <figure class="w-[230px] shrink-0 snap-start sm:w-[258px]">
+        class="gallery-track flex snap-x snap-mandatory gap-4 overflow-x-auto pb-6 text-center sm:gap-6">
+        <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
           <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="assets/screens/registrar.png"
               alt="Registro com escolha de humor e campo de nota" width="1080" height="1920" loading="lazy"></div>
           <figcaption class="mt-4 font-extrabold">Um momento para você</figcaption>
         </figure>
-        <figure class="w-[230px] shrink-0 snap-start sm:w-[258px]">
+        <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
           <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="assets/screens/registros.png"
               alt="Histórico com notas, atividades e humores" width="1080" height="1920" loading="lazy"></div>
           <figcaption class="mt-4 font-extrabold">Memórias com contexto</figcaption>
         </figure>
-        <figure class="w-[230px] shrink-0 snap-start sm:w-[258px]">
+        <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
           <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="assets/screens/historico.png"
               alt="Mapa visual dos registros de humor" width="1080" height="1920" loading="lazy"></div>
           <figcaption class="mt-4 font-extrabold">Sua história em cores</figcaption>
         </figure>
-        <figure class="w-[230px] shrink-0 snap-start sm:w-[258px]">
+        <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
           <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="assets/screens/conquistas.png"
               alt="Conquistas por manter o hábito de registrar" width="1080" height="1920" loading="lazy"></div>
           <figcaption class="mt-4 font-extrabold">Pequenas conquistas</figcaption>
         </figure>
-        <figure class="w-[230px] shrink-0 snap-start sm:w-[258px]">
+        <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
           <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="assets/screens/modo-escuro.png"
               alt="Diário com aparência escura" width="1080" height="1920" loading="lazy"></div>
           <figcaption class="mt-4 font-extrabold">No seu momento</figcaption>
@@ -355,7 +376,7 @@
     </section>
 
     <section id="privacidade" class="bg-sage py-20 lg:py-24" aria-labelledby="privacy-title">
-      <div class="wrap grid gap-10 lg:grid-cols-[1fr_.9fr] lg:gap-24">
+      <div class="wrap grid gap-10 md:grid-cols-[1fr_.9fr] md:gap-12 lg:gap-24">
         <div><svg class="mb-6 size-10 text-honey" aria-hidden="true">
             <use href="#lock" />
           </svg>
@@ -374,7 +395,8 @@
           </div>
           <div class="py-5">
             <dt class="text-xl font-extrabold">Backup sob seu controle</dt>
-            <dd class="mt-2 text-muted">Exporte um arquivo e escolha onde salvá-lo, inclusive no Google Drive.</dd>
+            <dd class="mt-2 text-muted">Exporte um arquivo e escolha onde salvá-lo, inclusive no Google Drive. Com o
+              backup do Google ativo, o Android também pode levar seu diário para um celular novo.</dd>
           </div>
           <div class="py-5">
             <dt class="text-xl font-extrabold">Liberdade para revisitar</dt>
@@ -409,12 +431,14 @@
               opcionais.</p>
           </details>
           <details class="faq-item">
-            <summary>Os dados ficam na nuvem?<svg class="faq-plus size-6 shrink-0 transition-transform"
+            <summary>E se eu trocar de celular?<svg class="faq-plus size-6 shrink-0 transition-transform"
                 aria-hidden="true">
                 <use href="#plus" />
               </svg></summary>
-            <p>O diário é armazenado localmente no aparelho. A função de backup permite exportar um arquivo para o local
-              que você escolher. Não há sincronização automática do diário entre aparelhos.</p>
+            <p>O diário é armazenado no aparelho, sem conta nem servidores do DailyBetter, e não há sincronização
+              contínua na nuvem. Se o backup do Google estiver ativo no seu celular, o Android pode incluí-lo na cópia de
+              segurança e restaurá-lo ao configurar um aparelho novo. Para garantir, use também a função de exportar
+              backup do app.</p>
           </details>
           <details class="faq-item">
             <summary>O app faz diagnóstico?<svg class="faq-plus size-6 shrink-0 transition-transform"
@@ -438,7 +462,7 @@
         <h2 id="download-title" class="section-title mx-auto max-w-3xl">Hoje já é um bom dia<br>para se escutar.</h2>
         <p class="mx-auto mt-6 max-w-lg text-lg leading-relaxed text-[#674600]">Leve um pouco mais de atenção para os
           seus dias. Comece com uma carinha. O resto vem no seu tempo.</p><a
-          href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_moodtrack" target="_blank"
+          href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank"
           rel="noopener noreferrer" class="button-dark mt-8"><svg class="size-6" aria-hidden="true">
             <use href="#play" />
           </svg>Ver no Google Play<svg class="size-5" aria-hidden="true">
@@ -449,23 +473,44 @@
     </section>
   </main>
 
-  <footer class="bg-paper py-10">
-    <div class="wrap flex flex-col justify-between gap-8 border-b border-ink/15 pb-8 md:flex-row md:items-start">
-      <div><a href="#inicio" class="brand-logo"><img src="assets/moods/excellent.png" alt="" width="32"
-            height="32"><span>Daily<span class="text-honey">Better</span></span></a>
-        <p class="mt-3 text-sm text-muted">Um espaço para todos os seus dias.</p>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand-logo" href="#inicio" aria-label="DailyBetter, página inicial"><img src="assets/moods/excellent.png" alt="" width="36" height="36"><span>Daily<em>Better</em></span></a>
+          <p class="footer-tagline">Um espaço para todos os seus dias. Registre seu humor e conheça melhor o seu ritmo.</p>
+          <a class="footer-store" href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 15 9-15 9V3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m5 3 10 12m-10 6 10-12" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>Ver no Google Play</a>
+        </div>
+        <div class="footer-columns">
+          <nav class="footer-column" aria-labelledby="footer-produto">
+            <h2 id="footer-produto">Produto</h2>
+            <ul>
+              <li><a href="#como-funciona">Como funciona</a></li>
+              <li><a href="#seus-dias">Por dentro do app</a></li>
+              <li><a href="#telas">Telas</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-column" aria-labelledby="footer-suporte">
+            <h2 id="footer-suporte">Suporte</h2>
+            <ul>
+              <li><a href="#duvidas">Dúvidas</a></li>
+              <li><a href="contact.html">Contato</a></li>
+              <li><a href="mailto:iflagdev@gmail.com">E-mail</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-column" aria-labelledby="footer-legal">
+            <h2 id="footer-legal">Legal</h2>
+            <ul>
+              <li><a href="privacy.html">Privacidade</a></li>
+              <li><a href="terms.html">Termos de Uso</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
-      <nav class="flex flex-wrap gap-x-7 gap-y-4 text-sm font-bold text-muted" aria-label="Rodapé"><a
-          href="#como-funciona" class="hover:text-honey">Como funciona</a><a href="#duvidas"
-          class="hover:text-honey">Dúvidas</a><a href="mailto:iflagdev@gmail.com" class="hover:text-honey">Contato</a>
-      </nav>
-    </div>
-    <div class="wrap mt-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 text-xs text-muted"><span>© 2026
-        DailyBetter</span>
-      <nav class="flex items-center gap-4 text-xs font-bold" aria-label="Legal"><a href="privacy.html"
-          class="hover:text-honey">Política de Privacidade</a><span aria-hidden="true"
-          class="h-3 w-px bg-ink/20"></span><a href="terms.html" class="hover:text-honey">Termos de Uso</a></nav>
-      <span>Desenvolvido por iFlag</span>
+      <div class="footer-bottom">
+        <p>© 2026 DailyBetter. Todos os direitos reservados.</p>
+        <p>Desenvolvido por iFlag</p>
+      </div>
     </div>
   </footer>
 </body>
