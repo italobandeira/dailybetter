@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth motion-reduce:scroll-auto">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F8F8F2">
+  <title>DailyBetter — Free Mood Tracker &amp; Journal for Android</title>
+  <meta name="description"
+    content="Log how you feel in seconds with a single face. Add notes, activities and sleep when you want, and follow your days on a calendar and charts. Free, no account needed.">
+  <link rel="canonical" href="https://italobandeira.github.io/dailybetter/en/">
+  <link rel="alternate" hreflang="pt-BR" href="https://italobandeira.github.io/dailybetter/">
+  <link rel="alternate" hreflang="en" href="https://italobandeira.github.io/dailybetter/en/">
+  <link rel="alternate" hreflang="x-default" href="https://italobandeira.github.io/dailybetter/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DailyBetter">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta property="og:url" content="https://italobandeira.github.io/dailybetter/en/">
+  <meta property="og:title" content="DailyBetter — A space for all your days">
+  <meta property="og:description"
+    content="A free mood tracker for Android. Log how you feel with a single face and follow your days on a calendar and charts.">
+  <meta property="og:image" content="https://italobandeira.github.io/dailybetter/assets/icon.png">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "DailyBetter",
+    "operatingSystem": "Android",
+    "applicationCategory": "LifestyleApplication",
+    "description": "Mood tracker and journal for Android: log how you feel with a single face, add notes, activities and sleep, and follow your days on a calendar and charts.",
+    "inLanguage": "en",
+    "url": "https://italobandeira.github.io/dailybetter/en/",
+    "downloadUrl": "https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker",
+    "image": "https://italobandeira.github.io/dailybetter/assets/icon.png",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Italo Bandeira" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Is DailyBetter free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The app is free, shows ads and has no subscription." } },
+      { "@type": "Question", "name": "Do I have to log every day?", "acceptedAnswer": { "@type": "Answer", "text": "No. Log whenever it makes sense to you. More entries make patterns easier to see, but there is no daily goal and no penalty for skipping a day." } },
+      { "@type": "Question", "name": "Can I log just my mood?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Picking a face is a complete entry. Notes, activities, sleep and energy are optional." } },
+      { "@type": "Question", "name": "What if I switch phones?", "acceptedAnswer": { "@type": "Answer", "text": "Export a backup from the app and keep the file wherever you like, such as Google Drive. On your new phone, install DailyBetter and import that file. If Google backup is turned on in Android, the system may also restore the app automatically." } },
+      { "@type": "Question", "name": "Does the app diagnose anything?", "acceptedAnswer": { "@type": "Answer", "text": "No. DailyBetter is a journal for personal reflection. Its charts only show what you logged and are not a substitute for professional assessment or advice." } }
+    ]
+  }
+  </script>
+  <link rel="icon" type="image/png" href="../assets/moods/excellent.png">
+  <link rel="preload" href="../assets/fonts/Nunito.ttf" as="font" type="font/ttf" crossorigin>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { paper: '#F8F8F2', ink: '#292B26', muted: '#606459', brand: '#FEC260', honey: '#805300', sage: '#E7EBDD', charcoal: '#20211F' },
+          fontFamily: { sans: ['Nunito', 'system-ui', 'sans-serif'] },
+          boxShadow: { phone: '0 30px 70px -22px rgb(32 33 31 / 30%)' }
+        }
+      }
+    };
+  </script>
+  <style type="text/tailwindcss">
+    @font-face { font-family: Nunito; src: url('../assets/fonts/Nunito.ttf') format('truetype'); font-weight: 200 1000; font-style: normal; font-display: swap; }
+    @layer base {
+      body { @apply bg-paper font-sans text-ink antialiased; }
+      h1,h2,h3 { text-wrap: balance; }
+      p { text-wrap: pretty; }
+      :focus-visible { @apply outline outline-[3px] outline-offset-4 outline-honey; }
+      section[id] { scroll-margin-top: 100px; }
+      summary::-webkit-details-marker { display: none; }
+    }
+    @layer components {
+      .wrap { @apply mx-auto w-[calc(100%-2.5rem)] max-w-[1200px] sm:w-[calc(100%-4rem)]; }
+      .brand-logo { @apply inline-flex shrink-0 items-center gap-2 text-[23px] font-black tracking-[-.03em]; }
+      .button { @apply inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl px-6 py-3 font-extrabold transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0 motion-reduce:transform-none; }
+      .button-primary { @apply button bg-brand text-[#332100]; }
+      .button-dark { @apply button bg-charcoal text-white; }
+      .section-title { @apply text-[clamp(2rem,4.8vw+.5rem,4.2rem)] font-black leading-[1.08] tracking-[-.035em]; }
+      .phone { @apply overflow-hidden rounded-[32px] border-[6px] border-[#33362E] bg-paper shadow-phone; }
+      .phone img { @apply block h-auto w-full; }
+      .feature-panel { @apply pb-10 sm:pb-12; }
+      .feature-panel .phone { @apply max-w-full translate-y-0; }
+      .cta-faces { @apply mx-auto w-fit items-center rounded-full bg-charcoal px-7 py-5; }
+      .mood-choice { @apply flex min-h-[82px] min-w-0 flex-1 flex-col items-center justify-center gap-2 rounded-2xl px-0.5 py-2 text-[11px] font-bold transition-colors hover:bg-white sm:px-1 sm:text-xs; }
+      .mood-choice[aria-pressed="true"] { @apply bg-white ring-2 ring-honey; }
+      .mood-choice img { @apply size-9 min-[380px]:size-10 sm:size-12; }
+      .faq-item { @apply border-b border-ink/15 py-5; }
+      .faq-item summary { @apply flex min-h-12 cursor-pointer list-none items-center justify-between gap-5 text-base font-extrabold sm:text-lg; }
+      .faq-item p { @apply max-w-2xl pb-3 pt-3 leading-relaxed text-muted sm:pr-10; }
+      .faq-item[open] .faq-plus { @apply rotate-45; }
+      .theme-button { @apply min-h-11 rounded-full px-5 text-sm font-extrabold transition-colors; }
+      .theme-button[aria-pressed="true"] { @apply bg-brand text-[#332100]; }
+      .lang-link { @apply grid min-h-11 min-w-11 place-items-center rounded-full border border-ink/20 px-3 text-xs font-black tracking-wide hover:bg-sage; }
+      /* Full-bleed scroller whose first card lines up with .wrap content. */
+      .gallery-track { --edge: max(1.25rem, calc((100% - 1200px) / 2)); padding-inline: var(--edge); scroll-padding-inline: var(--edge); }
+      @media (min-width: 640px) { .gallery-track { --edge: max(2rem, calc((100% - 1200px) / 2)); } }
+      /* Thin, rounded scrollbar inset to the content width. */
+      .gallery-track::-webkit-scrollbar { height: 6px; }
+      .gallery-track::-webkit-scrollbar-track { margin-inline: max(1.25rem, calc(50vw - 600px)); /* % is not resolved inside scrollbar pseudos */ border-radius: 999px; background: rgb(41 43 38 / 7%); }
+      @media (min-width: 640px) { .gallery-track::-webkit-scrollbar-track { margin-inline: max(2rem, calc(50vw - 600px)); } }
+      .gallery-track::-webkit-scrollbar-thumb { border-radius: 999px; background: rgb(41 43 38 / 22%); }
+      .gallery-track::-webkit-scrollbar-thumb:hover { background: rgb(128 83 0 / 55%); }
+      @supports not selector(::-webkit-scrollbar) { .gallery-track { scrollbar-width: thin; scrollbar-color: rgb(41 43 38 / 25%) transparent; } }
+    }
+  </style>
+  <link rel="stylesheet" href="../footer.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js" defer></script>
+  <script src="../main.js" defer></script>
+</head>
+
+<body>
+  <a href="#conteudo"
+    class="fixed left-4 top-4 z-[100] -translate-y-24 rounded-xl bg-ink px-5 py-3 font-bold text-white focus:translate-y-0">Skip
+    to content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="absolute size-0 overflow-hidden" aria-hidden="true">
+    <symbol id="arrow" viewBox="0 0 24 24">
+      <path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
+    <symbol id="play" viewBox="0 0 24 24">
+      <path d="m5 3 15 9-15 9V3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+      <path d="m5 3 10 12m-10 6 10-12" fill="none" stroke="currentColor" stroke-width="1.2" />
+    </symbol>
+    <symbol id="check" viewBox="0 0 24 24">
+      <path d="m5 12 4 4L19 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </symbol>
+    <symbol id="plus" viewBox="0 0 24 24">
+      <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    </symbol>
+    <symbol id="lock" viewBox="0 0 24 24">
+      <rect x="5" y="10" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.6" />
+      <path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2" fill="none" stroke="currentColor" stroke-width="1.6"
+        stroke-linecap="round" />
+    </symbol>
+    <symbol id="menu" viewBox="0 0 24 24">
+      <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    </symbol>
+  </svg>
+
+  <header data-header class="sticky top-0 z-50 border-b border-ink/10 bg-paper/95 backdrop-blur-md">
+    <div class="wrap flex h-20 items-center justify-between gap-5">
+      <a href="#inicio" class="brand-logo" aria-label="DailyBetter, home"><img src="../assets/moods/excellent.png" alt=""
+          width="36" height="36"><span>Daily<span class="text-honey">Better</span></span></a>
+      <nav class="hidden items-center gap-7 text-sm font-bold text-muted lg:flex" aria-label="Main navigation"><a
+          href="#como-funciona" class="hover:text-honey">How it works</a><a href="#recursos"
+          class="hover:text-honey">Features</a><a href="#privacidade" class="hover:text-honey">Privacy</a><a
+          href="blog/index.html" class="hover:text-honey">Blog</a><a href="contact.html"
+          class="hover:text-honey">Contact</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="../index.html" hreflang="pt-BR" lang="pt-BR" class="lang-link" aria-label="Versão em português">PT</a>
+        <a href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank"
+          rel="noopener noreferrer"
+          class="hidden min-h-11 items-center gap-3 rounded-full bg-ink px-5 text-sm font-extrabold text-white sm:inline-flex">Get it
+          free<svg class="size-4" aria-hidden="true">
+            <use href="#arrow" />
+          </svg></a>
+        <button id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"
+          data-label-open="Open menu" data-label-close="Close menu"
+          class="-mr-3 grid size-12 place-items-center rounded-xl hover:bg-sage lg:hidden"><svg class="size-6"
+            aria-hidden="true">
+            <use href="#menu" />
+          </svg></button>
+      </div>
+    </div>
+    <nav id="mobile-menu" class="wrap hidden max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-ink/10 pb-5 pt-3 lg:hidden"
+      aria-label="Mobile navigation"><a class="flex min-h-12 items-center font-bold" href="#como-funciona">How
+        it works</a><a class="flex min-h-12 items-center font-bold" href="#recursos">Features</a><a
+        class="flex min-h-12 items-center font-bold" href="#privacidade">Privacy</a><a
+        class="flex min-h-12 items-center font-bold" href="#duvidas">FAQ</a><a
+        class="flex min-h-12 items-center font-bold" href="blog/index.html">Blog</a><a
+        class="flex min-h-12 items-center font-bold" href="contact.html">Contact</a><a
+        class="mt-3 flex min-h-12 items-center justify-center gap-3 rounded-2xl bg-ink font-extrabold text-white sm:hidden"
+        href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank"
+        rel="noopener noreferrer">Get it free on Google Play<svg class="size-4" aria-hidden="true">
+          <use href="#arrow" />
+        </svg></a></nav>
+  </header>
+
+  <main id="conteudo">
+    <section id="inicio" class="hero relative overflow-hidden pb-16 pt-12 lg:pb-20 lg:pt-20"
+      aria-labelledby="hero-title">
+      <div class="wrap grid items-center gap-12 lg:min-h-[600px] lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+        <div class="hero-copy relative z-10">
+          <p class="mb-5 text-sm font-black uppercase tracking-[.08em] text-honey">Mood tracker for Android</p>
+          <h1 id="hero-title"
+            class="max-w-[660px] text-[clamp(2.6rem,5.8vw+.6rem,5.1rem)] font-black leading-[1.03] tracking-[-.04em]">A space
+            for <span class="text-honey">all</span> your days.</h1>
+          <p class="mt-6 max-w-[500px] text-lg leading-relaxed text-muted sm:text-xl">Log how you feel in a few
+            seconds with a single face. Add a note about what happened if you like. Over time, the calendar and charts
+            show how your days change.</p>
+          <div class="mt-8 flex flex-wrap items-center gap-5"><a class="button-primary"
+              href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank"
+              rel="noopener noreferrer"><svg class="size-6" aria-hidden="true">
+                <use href="#play" />
+              </svg>Get it free on Google Play</a><a href="#como-funciona"
+              class="inline-flex min-h-12 items-center gap-2 text-sm font-extrabold">See how it works<svg
+                class="size-5 rotate-90" aria-hidden="true">
+                <use href="#arrow" />
+              </svg></a></div>
+          <ul class="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+            <li class="inline-flex items-center gap-1.5"><svg class="size-4" aria-hidden="true">
+                <use href="#check" />
+              </svg>Free, no subscription</li>
+            <li class="inline-flex items-center gap-1.5"><svg class="size-4" aria-hidden="true">
+                <use href="#check" />
+              </svg>No account needed</li>
+            <li class="inline-flex items-center gap-1.5"><svg class="size-4" aria-hidden="true">
+                <use href="#check" />
+              </svg>Entries stay on your phone</li>
+          </ul>
+        </div>
+        <div
+          class="hero-stage relative mx-auto aspect-[480/600] max-h-[600px] w-full max-w-[400px] sm:max-w-[460px] lg:max-w-[440px] xl:max-w-[480px]">
+          <div class="absolute inset-x-0 bottom-10 top-10 rounded-[50%] bg-sage" aria-hidden="true"></div>
+          <div class="hero-secondary phone absolute right-0 top-12 w-[46%] rotate-[9deg] sm:top-16"><img
+              src="../assets/screens/calendario.png"
+              alt="DailyBetter monthly calendar with a face on each logged day" width="1080" height="1920">
+          </div>
+          <div class="hero-phone phone absolute bottom-2 left-[9%] w-[53%] -rotate-[5deg] sm:bottom-5"><img
+              src="../assets/screens/inicio.png"
+              alt="DailyBetter home screen with mood picker, weekly summary and latest entry" width="1080"
+              height="1920" fetchpriority="high"></div>
+          <img class="hero-face absolute left-0 top-4 w-[20%] -rotate-12" src="../assets/moods/excellent.png" alt=""
+            width="800" height="800" aria-hidden="true">
+          <img class="hero-face absolute bottom-1 right-0 w-[17%] rotate-12" src="../assets/moods/good.png" alt=""
+            width="800" height="800" aria-hidden="true">
+        </div>
+      </div>
+      <div
+        class="wrap mt-12 flex flex-col gap-6 border-t border-ink/15 pt-7 sm:flex-row sm:items-center sm:justify-between">
+        <p class="max-w-sm text-sm leading-relaxed text-muted">Five faces, from Excellent to Terrible.<br><strong
+            class="font-extrabold text-ink">Every day has room here, the hard ones too.</strong></p>
+        <div class="flex items-center gap-3 sm:gap-5"><img src="../assets/moods/excellent.png" alt="Excellent" width="48"
+            height="48"><img src="../assets/moods/good.png" alt="Good" width="48" height="48"><img
+            src="../assets/moods/neutral.png" alt="Neutral" width="48" height="48"><img src="../assets/moods/bad.png"
+            alt="Bad" width="48" height="48"><img src="../assets/moods/terrible.png" alt="Terrible" width="48" height="48">
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="bg-sage py-20 lg:py-28" aria-labelledby="how-title">
+      <div class="wrap grid items-center gap-12 [&>*]:min-w-0 lg:grid-cols-2 lg:gap-24">
+        <div>
+          <h2 id="how-title" class="section-title">How it works,<br>in three steps.</h2>
+          <p class="mt-6 max-w-lg text-lg leading-relaxed text-muted">An entry can take five seconds. You decide
+            how much to share.</p>
+          <ol class="mt-9 space-y-6">
+            <li class="flex gap-4"><span
+                class="grid size-9 shrink-0 place-items-center rounded-full bg-white text-sm font-black">1</span>
+              <div>
+                <h3 class="font-extrabold">Pick how you feel</h3>
+                <p class="mt-1 text-sm leading-relaxed text-muted">Tap one of the five faces. That alone is a
+                  complete entry.</p>
+              </div>
+            </li>
+            <li class="flex gap-4"><span
+                class="grid size-9 shrink-0 place-items-center rounded-full bg-white text-sm font-black">2</span>
+              <div>
+                <h3 class="font-extrabold">Add details if you want</h3>
+                <p class="mt-1 text-sm leading-relaxed text-muted">A note, what you did today, how you slept and
+                  your energy level. All optional.</p>
+              </div>
+            </li>
+            <li class="flex gap-4"><span
+                class="grid size-9 shrink-0 place-items-center rounded-full bg-white text-sm font-black">3</span>
+              <div>
+                <h3 class="font-extrabold">Spot your patterns</h3>
+                <p class="mt-1 text-sm leading-relaxed text-muted">See your days on the calendar and in weekly and
+                  monthly charts, and notice what tends to shape your mood.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+        <div class="min-w-0 rounded-[28px] bg-paper p-4 min-[380px]:p-5 sm:p-9">
+          <div class="flex items-center justify-between text-xs font-bold text-muted"><span>Try it
+              here</span><span>Interactive preview</span></div>
+          <h3 class="mt-7 text-2xl font-black tracking-tight">How are you feeling right now?</h3>
+          <p class="mt-2 text-sm text-muted">Tap a face to see how it works in the app.</p>
+          <div class="my-7 flex gap-1" role="group" aria-label="Preview: pick a mood">
+            <button class="mood-choice" type="button" data-mood="excellent" aria-pressed="false"
+              data-message="What a day! Write down what made it great so you can remember it."><img
+                src="../assets/moods/excellent.png" alt="" width="48" height="48"><span>Excellent</span></button>
+            <button class="mood-choice" type="button" data-mood="good" aria-pressed="true"
+              data-message="Glad to hear it. Hold on to a bit of this moment."><img
+                src="../assets/moods/good.png" alt="" width="48" height="48"><span>Good</span></button>
+            <button class="mood-choice" type="button" data-mood="neutral" aria-pressed="false"
+              data-message="Quiet days are part of your story too."><img
+                src="../assets/moods/neutral.png" alt="" width="48" height="48"><span>Neutral</span></button>
+            <button class="mood-choice" type="button" data-mood="bad" aria-pressed="false"
+              data-message="Hard days have room here too."><img
+                src="../assets/moods/bad.png" alt="" width="48" height="48"><span>Bad</span></button>
+            <button class="mood-choice" type="button" data-mood="terrible" aria-pressed="false"
+              data-message="You can log just the face. No explanation needed."><img
+                src="../assets/moods/terrible.png" alt="" width="48" height="48"><span>Terrible</span></button>
+          </div>
+          <div class="border-t border-ink/15 pt-6">
+            <p class="mood-response min-h-12 font-extrabold" role="status" aria-live="polite">Glad to hear it. Hold on to a bit
+              of this moment.</p>
+            <p class="mt-4 text-xs leading-relaxed text-muted">This preview doesn't save or send your choice. To start
+              your journal, get the app.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="recursos" class="py-20 lg:py-28" aria-labelledby="days-title">
+      <div class="wrap">
+        <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <h2 id="days-title" class="section-title max-w-2xl">Your entries become<br>a picture of your days.</h2>
+          <p class="max-w-sm text-lg leading-relaxed text-muted">The more you log, the easier it is to notice what
+            repeats: lighter weeks, poor nights of sleep, activities that do you good.</p>
+        </div>
+        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:mt-14 lg:grid-cols-[1.1fr_.9fr]">
+          <article class="feature-panel overflow-hidden rounded-[28px] bg-[#EDEFE4] px-6 pt-8 sm:px-8 sm:pt-10 lg:px-10">
+            <h3 class="text-[1.75rem] font-black leading-tight tracking-[-.025em] sm:text-3xl">Mood calendar</h3>
+            <p class="mt-3 max-w-md leading-relaxed text-muted">Every logged day gets its face. At a glance you see
+              how your month went, and you can open any day to reread what you wrote.</p>
+            <div class="phone mx-auto mt-9 w-[230px] translate-y-5 sm:w-[260px]"><img
+                src="../assets/screens/calendario.png" alt="DailyBetter mood calendar" width="1080" height="1920"
+                loading="lazy"></div>
+          </article>
+          <article class="feature-panel overflow-hidden rounded-[28px] bg-[#F9E8C9] px-6 pt-8 sm:px-8 sm:pt-10 lg:px-10">
+            <h3 class="text-[1.75rem] font-black leading-tight tracking-[-.025em] sm:text-3xl">Charts and stats</h3>
+            <p class="mt-3 max-w-md leading-relaxed text-[#6C5634]">Weekly and monthly charts and a color history
+              show how your mood changes over time.</p>
+            <div class="phone mx-auto mt-9 w-[230px] translate-y-5 sm:w-[260px]"><img
+                src="../assets/screens/estatisticas.png" alt="Weekly stats with a mood chart" width="1080"
+                height="1920" loading="lazy"></div>
+          </article>
+        </div>
+        <div class="mt-12 grid gap-8 border-t border-ink/15 pt-9 md:grid-cols-3">
+          <article>
+            <h3 class="text-xl font-black">Notes</h3>
+            <p class="mt-3 leading-relaxed text-muted">Write down what happened and what made a difference
+              in your day, in your own words.</p>
+          </article>
+          <article>
+            <h3 class="text-xl font-black">Activities, sleep and energy</h3>
+            <p class="mt-3 leading-relaxed text-muted">Capture the context of your day to understand what a
+              face alone can't explain.</p>
+          </article>
+          <article>
+            <h3 class="text-xl font-black">Reminders</h3>
+            <p class="mt-3 leading-relaxed text-muted">Pick a time and get a gentle nudge to log your day.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="aparencia" class="overflow-hidden bg-charcoal py-20 text-[#F4F2E8] lg:py-28"
+      aria-labelledby="theme-title">
+      <div class="wrap grid items-center gap-12 md:grid-cols-[1fr_.85fr] md:gap-10 lg:gap-24">
+        <div>
+          <h2 id="theme-title" class="section-title">Light or dark theme.<br><span class="text-brand">Your
+              call.</span>
+          </h2>
+          <p class="mt-6 max-w-lg text-lg leading-relaxed text-[#BCC0B3]">A simple interface with faces that are easy to
+            recognize. Use the dark theme at night and the light one during the day, or whichever you prefer.</p>
+          <div class="mt-8 inline-flex rounded-full border border-white/20 p-1" role="group"
+            aria-label="Choose the preview theme"><button class="theme-button" type="button" data-theme="light"
+              aria-pressed="false" data-src="../assets/screens/inicio.png" data-alt="Home screen in the light theme"
+              data-status="Showing the light theme.">Light theme</button><button class="theme-button" type="button"
+              data-theme="dark" aria-pressed="true" data-src="../assets/screens/modo-escuro.png"
+              data-alt="Home screen in the dark theme" data-status="Showing the dark theme.">Dark theme</button></div>
+          <p id="theme-status" class="mt-4 text-sm text-[#BCC0B3]" aria-live="polite">Showing the dark theme.</p><a
+            href="#telas" class="mt-10 inline-flex min-h-12 items-center gap-3 font-extrabold text-brand">See more
+            app screens<svg class="size-5" aria-hidden="true">
+              <use href="#arrow" />
+            </svg></a>
+        </div>
+        <div class="relative mx-auto w-full max-w-[355px]">
+          <div class="absolute inset-x-[-20%] bottom-[15%] top-[15%] rounded-full bg-[#30352B]" aria-hidden="true">
+          </div>
+          <div class="phone relative mx-auto w-[min(250px,70vw)] rotate-[3deg] border-[#464A3F] sm:w-[275px] md:w-[250px] lg:w-[275px]"><img
+              id="theme-screen" src="../assets/screens/modo-escuro.png" alt="Home screen in the dark theme" width="1080"
+              height="1920" loading="lazy"></div><img class="absolute -left-1 bottom-8 w-16 -rotate-12 sm:-left-3 sm:w-20"
+            src="../assets/moods/good.png" alt="" width="800" height="800" aria-hidden="true">
+        </div>
+      </div>
+    </section>
+
+    <section id="telas" class="py-20 lg:py-28" aria-labelledby="screens-title">
+      <div class="wrap mb-10 flex items-end justify-between gap-5">
+        <div>
+          <h2 id="screens-title" class="section-title">Take a look inside.</h2>
+          <p class="mt-5 max-w-xl text-lg text-muted">Real DailyBetter screens with sample entries, shown in Portuguese.<span class="sm:hidden"> Swipe to see more.</span></p>
+        </div>
+        <div class="hidden shrink-0 gap-2 sm:flex"><button id="gallery-prev" type="button"
+            class="grid size-12 place-items-center rounded-full border border-ink/20 disabled:opacity-30"
+            aria-label="Previous screens"><svg class="size-5 rotate-180" aria-hidden="true">
+              <use href="#arrow" />
+            </svg></button><button id="gallery-next" type="button"
+            class="grid size-12 place-items-center rounded-full border border-ink/20 disabled:opacity-30"
+            aria-label="Next screens"><svg class="size-5" aria-hidden="true">
+              <use href="#arrow" />
+            </svg></button></div>
+      </div>
+      <div id="gallery" tabindex="0" aria-label="Screen gallery; scroll to see more"
+        class="gallery-track flex snap-x snap-mandatory gap-4 overflow-x-auto pb-6 text-center sm:gap-6">
+        <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
+          <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="../assets/screens/registrar.png"
+              alt="New entry with mood picker and note field" width="1080" height="1920" loading="lazy"></div>
+          <figcaption class="mt-4 font-extrabold">New entry</figcaption>
+        </figure>
+        <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
+          <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="../assets/screens/registros.png"
+              alt="List of entries with notes, activities and moods" width="1080" height="1920" loading="lazy"></div>
+          <figcaption class="mt-4 font-extrabold">Your entries</figcaption>
+        </figure>
+        <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
+          <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="../assets/screens/historico.png"
+              alt="Visual map of mood entries" width="1080" height="1920" loading="lazy"></div>
+          <figcaption class="mt-4 font-extrabold">Color history</figcaption>
+        </figure>
+        <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
+          <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="../assets/screens/conquistas.png"
+              alt="Achievements for keeping the logging habit" width="1080" height="1920" loading="lazy"></div>
+          <figcaption class="mt-4 font-extrabold">Achievements</figcaption>
+        </figure>
+        <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
+          <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="../assets/screens/modo-escuro.png"
+              alt="Home screen in the dark theme" width="1080" height="1920" loading="lazy"></div>
+          <figcaption class="mt-4 font-extrabold">Dark theme</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="privacidade" class="bg-sage py-20 lg:py-24" aria-labelledby="privacy-title">
+      <div class="wrap grid gap-10 md:grid-cols-[1fr_.9fr] md:gap-12 lg:gap-24">
+        <div><svg class="mb-6 size-10 text-honey" aria-hidden="true">
+            <use href="#lock" />
+          </svg>
+          <h2 id="privacy-title" class="section-title">Your journal stays<br>on your phone.</h2>
+          <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted">Entries are saved on your device, not on
+            DailyBetter servers. No one but you reads what you write.</p><a href="privacy.html"
+            class="mt-8 inline-flex min-h-12 items-center gap-2 font-extrabold text-honey">Read the Privacy
+            Policy<svg class="size-5" aria-hidden="true">
+              <use href="#arrow" />
+            </svg></a>
+        </div>
+        <dl class="divide-y divide-ink/15 self-center">
+          <div class="py-5">
+            <dt class="text-xl font-extrabold">No account needed</dt>
+            <dd class="mt-2 text-muted">No sign-up, email or password. Open the app and log your first entry.</dd>
+          </div>
+          <div class="py-5">
+            <dt class="text-xl font-extrabold">Back up whenever you want</dt>
+            <dd class="mt-2 text-muted">Export a backup file and save it wherever you like, such as Google Drive. To
+              restore, just import the file.</dd>
+          </div>
+          <div class="py-5">
+            <dt class="text-xl font-extrabold">You're in control</dt>
+            <dd class="mt-2 text-muted">Edit or delete any entry right in the app, anytime.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="duvidas" class="py-20 lg:py-28" aria-labelledby="faq-title">
+      <div class="wrap grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:gap-24">
+        <div>
+          <h2 id="faq-title" class="section-title">Frequently asked<br>questions.</h2>
+          <p class="mt-6 max-w-sm leading-relaxed text-muted">Didn't find your answer? <a href="contact.html"
+              class="font-extrabold text-honey underline underline-offset-4">Get in touch</a>.</p>
+        </div>
+        <div class="border-t border-ink/15">
+          <details class="faq-item" open>
+            <summary>Is DailyBetter free?<svg class="faq-plus size-6 shrink-0 transition-transform"
+                aria-hidden="true">
+                <use href="#plus" />
+              </svg></summary>
+            <p>Yes. The app is free, shows ads and has no subscription.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Do I have to log every day?<svg class="faq-plus size-6 shrink-0 transition-transform"
+                aria-hidden="true">
+                <use href="#plus" />
+              </svg></summary>
+            <p>No. Log whenever it makes sense to you. More entries make patterns easier to see, but there is no daily
+              goal and no penalty for skipping a day.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can I log just my mood?<svg class="faq-plus size-6 shrink-0 transition-transform"
+                aria-hidden="true">
+                <use href="#plus" />
+              </svg></summary>
+            <p>Yes. Picking a face is a complete entry. Notes, activities, sleep and energy are optional.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What if I switch phones?<svg class="faq-plus size-6 shrink-0 transition-transform"
+                aria-hidden="true">
+                <use href="#plus" />
+              </svg></summary>
+            <p>Export a backup from the app and keep the file wherever you like, such as Google Drive. On your new phone,
+              install DailyBetter and import that file. If Google backup is turned on in Android, the system may also
+              restore the app automatically. <a href="blog/backup-and-new-phone.html"
+                class="font-extrabold text-honey underline underline-offset-4">See the step-by-step guide</a>.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Does the app diagnose anything?<svg class="faq-plus size-6 shrink-0 transition-transform"
+                aria-hidden="true">
+                <use href="#plus" />
+              </svg></summary>
+            <p>No. DailyBetter is a journal for personal reflection. Its charts only show what you logged and are not a
+              substitute for professional assessment or advice.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="download" class="final-cta relative overflow-hidden bg-brand py-20 text-center lg:py-28"
+      aria-labelledby="download-title">
+      <div class="wrap relative z-10">
+        <div class="cta-faces mb-8 flex justify-center -space-x-2" aria-hidden="true"><img
+            class="size-14 -rotate-12 sm:size-16" src="../assets/moods/good.png" alt="" width="64" height="64"><img
+            class="size-16 sm:size-20" src="../assets/moods/excellent.png" alt="" width="80" height="80"><img
+            class="size-14 rotate-12 sm:size-16" src="../assets/moods/neutral.png" alt="" width="64" height="64"></div>
+        <h2 id="download-title" class="section-title mx-auto max-w-3xl">Start today.<br>One face is enough.</h2>
+        <p class="mx-auto mt-6 max-w-lg text-lg leading-relaxed text-[#674600]">Get DailyBetter, log how you feel
+          right now and watch your days take shape.</p><a
+          href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank"
+          rel="noopener noreferrer" class="button-dark mt-8"><svg class="size-6" aria-hidden="true">
+            <use href="#play" />
+          </svg>Get it on Google Play<svg class="size-5" aria-hidden="true">
+            <use href="#arrow" />
+          </svg></a>
+        <p class="mt-4 text-xs font-bold text-[#674600]">Free for Android · No account needed</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand-logo" href="#inicio" aria-label="DailyBetter, home page"><img src="../assets/moods/excellent.png" alt="" width="36" height="36"><span>Daily<em>Better</em></span></a>
+          <p class="footer-tagline">A free mood tracker for Android. A space for all your days.</p>
+          <a class="footer-store" href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 15 9-15 9V3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m5 3 10 12m-10 6 10-12" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>Get it on Google Play</a>
+        </div>
+        <div class="footer-columns">
+          <nav class="footer-column" aria-labelledby="footer-produto">
+            <h2 id="footer-produto">Product</h2>
+            <ul>
+              <li><a href="#como-funciona">How it works</a></li>
+              <li><a href="#recursos">Features</a></li>
+              <li><a href="#telas">Screens</a></li>
+              <li><a href="blog/index.html">Blog</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-column" aria-labelledby="footer-suporte">
+            <h2 id="footer-suporte">Support</h2>
+            <ul>
+              <li><a href="#duvidas">FAQ</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="mailto:iflagdev@gmail.com">Email</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-column" aria-labelledby="footer-legal">
+            <h2 id="footer-legal">Legal</h2>
+            <ul>
+              <li><a href="privacy.html">Privacy</a></li>
+              <li><a href="terms.html">Terms of Use</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 DailyBetter. All rights reserved.</p>
+        <p><a class="footer-lang" href="../index.html" hreflang="pt-BR" lang="pt-BR">Português</a> · Made by iFlag</p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -5,14 +5,52 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#F8F8F2">
+  <title>DailyBetter — Diário de humor grátis para Android</title>
   <meta name="description"
-    content="Conheça o DailyBetter: um diário de humor com carinhas, notas, atividades e calendário. Registre seus momentos e acompanhe seu próprio ritmo.">
+    content="Registre como você se sente em segundos com uma carinha. Adicione notas, atividades e sono quando quiser e acompanhe seus dias no calendário e nos gráficos. Grátis e sem criar conta.">
+  <link rel="canonical" href="https://italobandeira.github.io/dailybetter/">
+  <link rel="alternate" hreflang="pt-BR" href="https://italobandeira.github.io/dailybetter/">
+  <link rel="alternate" hreflang="en" href="https://italobandeira.github.io/dailybetter/en/">
+  <link rel="alternate" hreflang="x-default" href="https://italobandeira.github.io/dailybetter/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DailyBetter">
   <meta property="og:locale" content="pt_BR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:url" content="https://italobandeira.github.io/dailybetter/">
   <meta property="og:title" content="DailyBetter — Um espaço para todos os seus dias">
   <meta property="og:description"
-    content="Registre seu humor, guarde os pequenos momentos e conheça melhor o seu ritmo.">
-  <title>DailyBetter — Um espaço para todos os seus dias</title>
+    content="Diário de humor grátis para Android. Registre como você se sente com uma carinha e acompanhe seus dias no calendário e nos gráficos.">
+  <meta property="og:image" content="https://italobandeira.github.io/dailybetter/assets/icon.png">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "DailyBetter",
+    "operatingSystem": "Android",
+    "applicationCategory": "LifestyleApplication",
+    "description": "Diário de humor para Android: registre como você se sente com uma carinha, adicione notas, atividades e sono e acompanhe seus dias no calendário e nos gráficos.",
+    "inLanguage": "pt-BR",
+    "url": "https://italobandeira.github.io/dailybetter/",
+    "downloadUrl": "https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker",
+    "image": "https://italobandeira.github.io/dailybetter/assets/icon.png",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" },
+    "author": { "@type": "Person", "name": "Italo Bandeira" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "O DailyBetter é gratuito?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. O app é gratuito, exibe anúncios e não tem assinatura." } },
+      { "@type": "Question", "name": "Preciso registrar todos os dias?", "acceptedAnswer": { "@type": "Answer", "text": "Não. Registre quando fizer sentido. Quanto mais registros, mais fácil enxergar padrões, mas não existe meta diária nem penalidade por pular um dia." } },
+      { "@type": "Question", "name": "Posso registrar só o humor?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. Escolher uma carinha já é um registro completo. Nota, atividades, sono e energia são opcionais." } },
+      { "@type": "Question", "name": "E se eu trocar de celular?", "acceptedAnswer": { "@type": "Answer", "text": "Exporte um backup pelo app e guarde o arquivo onde preferir, como no Google Drive. No celular novo, instale o DailyBetter e importe esse arquivo. Se o backup do Google estiver ativo no Android, o sistema também pode restaurar o app automaticamente." } },
+      { "@type": "Question", "name": "O app faz diagnóstico?", "acceptedAnswer": { "@type": "Answer", "text": "Não. O DailyBetter é um diário para observação pessoal. Os gráficos mostram apenas o que você registrou e não substituem avaliação ou orientação profissional." } }
+    ]
+  }
+  </script>
   <link rel="icon" type="image/png" href="assets/moods/excellent.png">
   <link rel="preload" href="assets/fonts/Nunito.ttf" as="font" type="font/ttf" crossorigin>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -58,6 +96,7 @@
       .faq-item[open] .faq-plus { @apply rotate-45; }
       .theme-button { @apply min-h-11 rounded-full px-5 text-sm font-extrabold transition-colors; }
       .theme-button[aria-pressed="true"] { @apply bg-brand text-[#332100]; }
+      .lang-link { @apply grid min-h-11 min-w-11 place-items-center rounded-full border border-ink/20 px-3 text-xs font-black tracking-wide hover:bg-sage; }
       /* Full-bleed scroller whose first card lines up with .wrap content. */
       .gallery-track { --edge: max(1.25rem, calc((100% - 1200px) / 2)); padding-inline: var(--edge); scroll-padding-inline: var(--edge); }
       @media (min-width: 640px) { .gallery-track { --edge: max(2rem, calc((100% - 1200px) / 2)); } }
@@ -111,17 +150,21 @@
       <a href="#inicio" class="brand-logo" aria-label="DailyBetter, início"><img src="assets/moods/excellent.png" alt=""
           width="36" height="36"><span>Daily<span class="text-honey">Better</span></span></a>
       <nav class="hidden items-center gap-7 text-sm font-bold text-muted lg:flex" aria-label="Navegação principal"><a
-          href="#como-funciona" class="hover:text-honey">Como funciona</a><a href="#seus-dias"
-          class="hover:text-honey">Por dentro do app</a><a href="#privacidade" class="hover:text-honey">Privacidade</a><a
-          href="contact.html" class="hover:text-honey">Contato</a>
+          href="#como-funciona" class="hover:text-honey">Como funciona</a><a href="#recursos"
+          class="hover:text-honey">Recursos</a><a href="#privacidade" class="hover:text-honey">Privacidade</a><a
+          href="blog/index.html" class="hover:text-honey">Blog</a><a href="contact.html"
+          class="hover:text-honey">Contato</a>
       </nav>
       <div class="flex items-center gap-2">
-        <a href="#download"
-          class="hidden min-h-11 items-center gap-3 rounded-full bg-ink px-5 text-sm font-extrabold text-white sm:inline-flex">Conhecer
-          o app<svg class="size-4" aria-hidden="true">
+        <a href="en/index.html" hreflang="en" lang="en" class="lang-link" aria-label="English version">EN</a>
+        <a href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank"
+          rel="noopener noreferrer"
+          class="hidden min-h-11 items-center gap-3 rounded-full bg-ink px-5 text-sm font-extrabold text-white sm:inline-flex">Baixar
+          grátis<svg class="size-4" aria-hidden="true">
             <use href="#arrow" />
           </svg></a>
         <button id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"
+          data-label-open="Abrir menu" data-label-close="Fechar menu"
           class="-mr-3 grid size-12 place-items-center rounded-xl hover:bg-sage lg:hidden"><svg class="size-6"
             aria-hidden="true">
             <use href="#menu" />
@@ -130,12 +173,14 @@
     </div>
     <nav id="mobile-menu" class="wrap hidden max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-ink/10 pb-5 pt-3 lg:hidden"
       aria-label="Navegação móvel"><a class="flex min-h-12 items-center font-bold" href="#como-funciona">Como
-        funciona</a><a class="flex min-h-12 items-center font-bold" href="#seus-dias">Por dentro do app</a><a
+        funciona</a><a class="flex min-h-12 items-center font-bold" href="#recursos">Recursos</a><a
         class="flex min-h-12 items-center font-bold" href="#privacidade">Privacidade</a><a
-        class="flex min-h-12 items-center font-bold" href="#duvidas">Dúvidas</a><a
+        class="flex min-h-12 items-center font-bold" href="#duvidas">Perguntas frequentes</a><a
+        class="flex min-h-12 items-center font-bold" href="blog/index.html">Blog</a><a
         class="flex min-h-12 items-center font-bold" href="contact.html">Contato</a><a
         class="mt-3 flex min-h-12 items-center justify-center gap-3 rounded-2xl bg-ink font-extrabold text-white sm:hidden"
-        href="#download">Conhecer o app<svg class="size-4" aria-hidden="true">
+        href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank"
+        rel="noopener noreferrer">Baixar grátis no Google Play<svg class="size-4" aria-hidden="true">
           <use href="#arrow" />
         </svg></a></nav>
   </header>
@@ -145,26 +190,33 @@
       aria-labelledby="hero-title">
       <div class="wrap grid items-center gap-12 lg:min-h-[600px] lg:grid-cols-[1.1fr_1fr] lg:gap-16">
         <div class="hero-copy relative z-10">
+          <p class="mb-5 text-sm font-black uppercase tracking-[.08em] text-honey">Diário de humor para Android</p>
           <h1 id="hero-title"
             class="max-w-[660px] text-[clamp(2.6rem,5.8vw+.6rem,5.1rem)] font-black leading-[1.03] tracking-[-.04em]">Um espaço
             para <span class="text-honey">todos</span> os seus dias.</h1>
-          <p class="mt-6 max-w-[490px] text-lg leading-relaxed text-muted sm:text-xl">Os leves, os difíceis e os que
-            passam no meio. Registre seu humor e conheça melhor o seu ritmo com o DailyBetter.</p>
-          <div class="mt-8 flex flex-wrap items-center gap-5"><a class="button-primary" href="#download"><svg
-                class="size-6" aria-hidden="true">
+          <p class="mt-6 max-w-[500px] text-lg leading-relaxed text-muted sm:text-xl">Registre como você se sente em
+            poucos segundos, com uma carinha. Se quiser, anote o que aconteceu. Com o tempo, o calendário e os gráficos
+            mostram como seus dias variam.</p>
+          <div class="mt-8 flex flex-wrap items-center gap-5"><a class="button-primary"
+              href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank"
+              rel="noopener noreferrer"><svg class="size-6" aria-hidden="true">
                 <use href="#play" />
-              </svg>Conhecer para Android</a><a href="#como-funciona"
+              </svg>Baixar grátis no Google Play</a><a href="#como-funciona"
               class="inline-flex min-h-12 items-center gap-2 text-sm font-extrabold">Ver como funciona<svg
                 class="size-5 rotate-90" aria-hidden="true">
                 <use href="#arrow" />
               </svg></a></div>
-          <div class="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted"><span
-              class="inline-flex items-center gap-1.5"><svg class="size-4" aria-hidden="true">
+          <ul class="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+            <li class="inline-flex items-center gap-1.5"><svg class="size-4" aria-hidden="true">
                 <use href="#check" />
-              </svg>Sem criar conta</span><span class="inline-flex items-center gap-1.5"><svg class="size-4"
-                aria-hidden="true">
+              </svg>Grátis, sem assinatura</li>
+            <li class="inline-flex items-center gap-1.5"><svg class="size-4" aria-hidden="true">
                 <use href="#check" />
-              </svg>Do seu jeito</span></div>
+              </svg>Sem criar conta</li>
+            <li class="inline-flex items-center gap-1.5"><svg class="size-4" aria-hidden="true">
+                <use href="#check" />
+              </svg>Registros salvos no seu celular</li>
+          </ul>
         </div>
         <div
           class="hero-stage relative mx-auto aspect-[480/600] max-h-[600px] w-full max-w-[400px] sm:max-w-[460px] lg:max-w-[440px] xl:max-w-[480px]">
@@ -185,8 +237,8 @@
       </div>
       <div
         class="wrap mt-12 flex flex-col gap-6 border-t border-ink/15 pt-7 sm:flex-row sm:items-center sm:justify-between">
-        <p class="max-w-xs text-sm leading-relaxed text-muted">Não existe um jeito certo de sentir.<br><strong
-            class="font-extrabold text-ink">Existe o seu jeito de registrar.</strong></p>
+        <p class="max-w-sm text-sm leading-relaxed text-muted">Cinco carinhas, de Excelente a Péssimo.<br><strong
+            class="font-extrabold text-ink">Todos os dias cabem aqui, inclusive os difíceis.</strong></p>
         <div class="flex items-center gap-3 sm:gap-5"><img src="assets/moods/excellent.png" alt="Excelente" width="48"
             height="48"><img src="assets/moods/good.png" alt="Bom" width="48" height="48"><img
             src="assets/moods/neutral.png" alt="Neutro" width="48" height="48"><img src="assets/moods/bad.png"
@@ -198,83 +250,88 @@
     <section id="como-funciona" class="bg-sage py-20 lg:py-28" aria-labelledby="how-title">
       <div class="wrap grid items-center gap-12 [&>*]:min-w-0 lg:grid-cols-2 lg:gap-24">
         <div>
-          <h2 id="how-title" class="section-title">Tudo começa com<br>“como eu estou?”</h2>
-          <p class="mt-6 max-w-lg text-lg leading-relaxed text-muted">Um check-in pode ser só uma carinha. E, quando
-            fizer sentido, uma nota, uma atividade ou um pouco mais sobre o seu dia.</p>
+          <h2 id="how-title" class="section-title">Como funciona,<br>em três passos.</h2>
+          <p class="mt-6 max-w-lg text-lg leading-relaxed text-muted">Um registro pode levar cinco segundos. Você decide
+            quanto quer contar.</p>
           <ol class="mt-9 space-y-6">
             <li class="flex gap-4"><span
                 class="grid size-9 shrink-0 place-items-center rounded-full bg-white text-sm font-black">1</span>
               <div>
-                <h3 class="font-extrabold">Escolha seu humor</h3>
-                <p class="mt-1 text-sm leading-relaxed text-muted">Cinco carinhas para encontrar a que combina com o
-                  momento.</p>
+                <h3 class="font-extrabold">Escolha como você está</h3>
+                <p class="mt-1 text-sm leading-relaxed text-muted">Toque em uma das cinco carinhas. Só isso já é um
+                  registro.</p>
               </div>
             </li>
             <li class="flex gap-4"><span
                 class="grid size-9 shrink-0 place-items-center rounded-full bg-white text-sm font-black">2</span>
               <div>
-                <h3 class="font-extrabold">Acrescente o que importa</h3>
-                <p class="mt-1 text-sm leading-relaxed text-muted">Uma caminhada, uma conversa, uma noite de sono. Os
-                  detalhes são opcionais.</p>
+                <h3 class="font-extrabold">Adicione detalhes, se quiser</h3>
+                <p class="mt-1 text-sm leading-relaxed text-muted">Uma nota, as atividades do dia, como você dormiu e
+                  seu nível de energia. Tudo opcional.</p>
               </div>
             </li>
             <li class="flex gap-4"><span
                 class="grid size-9 shrink-0 place-items-center rounded-full bg-white text-sm font-black">3</span>
               <div>
-                <h3 class="font-extrabold">Guarde esse pedacinho do dia</h3>
-                <p class="mt-1 text-sm leading-relaxed text-muted">Seu registro vira parte de uma história que você pode
-                  revisitar.</p>
+                <h3 class="font-extrabold">Acompanhe seus padrões</h3>
+                <p class="mt-1 text-sm leading-relaxed text-muted">Veja seus dias no calendário e em gráficos semanais e
+                  mensais, e perceba o que costuma influenciar seu humor.</p>
               </div>
             </li>
           </ol>
         </div>
         <div class="min-w-0 rounded-[28px] bg-paper p-4 min-[380px]:p-5 sm:p-9">
-          <div class="flex items-center justify-between text-xs font-bold text-muted"><span>Experimente uma
-              escolha</span><span>Demonstração</span></div>
+          <div class="flex items-center justify-between text-xs font-bold text-muted"><span>Experimente
+              aqui</span><span>Prévia interativa</span></div>
           <h3 class="mt-7 text-2xl font-black tracking-tight">Como você está agora?</h3>
-          <p class="mt-2 text-sm text-muted">Por aqui, todos os sentimentos têm espaço.</p>
-          <div class="my-7 flex gap-1" role="group" aria-label="Demonstração: escolha um humor">
-            <button class="mood-choice" type="button" data-mood="Excelente" aria-pressed="false"><img
+          <p class="mt-2 text-sm text-muted">Toque em uma carinha para ver como é no app.</p>
+          <div class="my-7 flex gap-1" role="group" aria-label="Prévia: escolha um humor">
+            <button class="mood-choice" type="button" data-mood="excellent" aria-pressed="false"
+              data-message="Que dia! Anote o que deixou ele assim para lembrar depois."><img
                 src="assets/moods/excellent.png" alt="" width="48" height="48"><span>Excelente</span></button>
-            <button class="mood-choice" type="button" data-mood="Bom" aria-pressed="true"><img
+            <button class="mood-choice" type="button" data-mood="good" aria-pressed="true"
+              data-message="Que bom. Guarde um pouco desse momento."><img
                 src="assets/moods/good.png" alt="" width="48" height="48"><span>Bom</span></button>
-            <button class="mood-choice" type="button" data-mood="Neutro" aria-pressed="false"><img
+            <button class="mood-choice" type="button" data-mood="neutral" aria-pressed="false"
+              data-message="Dias tranquilos também contam a sua história."><img
                 src="assets/moods/neutral.png" alt="" width="48" height="48"><span>Neutro</span></button>
-            <button class="mood-choice" type="button" data-mood="Ruim" aria-pressed="false"><img
+            <button class="mood-choice" type="button" data-mood="bad" aria-pressed="false"
+              data-message="Dias difíceis também têm espaço aqui."><img
                 src="assets/moods/bad.png" alt="" width="48" height="48"><span>Ruim</span></button>
-            <button class="mood-choice" type="button" data-mood="Péssimo" aria-pressed="false"><img
+            <button class="mood-choice" type="button" data-mood="terrible" aria-pressed="false"
+              data-message="Você pode registrar só a carinha, sem precisar explicar nada."><img
                 src="assets/moods/terrible.png" alt="" width="48" height="48"><span>Péssimo</span></button>
           </div>
           <div class="border-t border-ink/15 pt-6">
             <p class="mood-response min-h-12 font-extrabold" role="status" aria-live="polite">Que bom. Guarde um pouco
               desse momento.</p>
-            <p class="mt-4 text-xs leading-relaxed text-muted">Esta prévia não salva nem envia sua escolha. No app, você
-              pode criar seu próprio diário.</p>
+            <p class="mt-4 text-xs leading-relaxed text-muted">Esta prévia não salva nem envia sua escolha. Para criar
+              seu diário, baixe o app.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="seus-dias" class="py-20 lg:py-28" aria-labelledby="days-title">
+    <section id="recursos" class="py-20 lg:py-28" aria-labelledby="days-title">
       <div class="wrap">
         <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <h2 id="days-title" class="section-title max-w-2xl">Pequenos registros.<br>Um novo olhar.</h2>
-          <p class="max-w-sm text-lg leading-relaxed text-muted">Com o tempo, os detalhes se encontram. Você começa a
-            perceber o que faz parte dos seus dias.</p>
+          <h2 id="days-title" class="section-title max-w-2xl">Seus registros viram<br>um retrato dos seus dias.</h2>
+          <p class="max-w-sm text-lg leading-relaxed text-muted">Quanto mais você registra, mais fácil fica perceber o
+            que se repete: semanas mais leves, noites mal dormidas, atividades que fazem bem.</p>
         </div>
         <div class="mt-12 grid gap-6 md:grid-cols-2 lg:mt-14 lg:grid-cols-[1.1fr_.9fr]">
           <article class="feature-panel overflow-hidden rounded-[28px] bg-[#EDEFE4] px-6 pt-8 sm:px-8 sm:pt-10 lg:px-10">
-            <h3 class="text-[1.75rem] font-black leading-tight tracking-[-.025em] sm:text-3xl">Seu mês tem muitas cores.</h3>
-            <p class="mt-3 max-w-md leading-relaxed text-muted">Volte aos dias que passaram e veja como se sentiu. Seu
-              calendário guarda os momentos bons e os difíceis.</p>
+            <h3 class="text-[1.75rem] font-black leading-tight tracking-[-.025em] sm:text-3xl">Calendário de humor</h3>
+            <p class="mt-3 max-w-md leading-relaxed text-muted">Cada dia registrado ganha a sua carinha. Em um olhar,
+              você vê como foi o mês e pode abrir qualquer dia para reler o que anotou.</p>
             <div class="phone mx-auto mt-9 w-[230px] translate-y-5 sm:w-[260px]"><img
                 src="assets/screens/calendario.png" alt="Calendário de humor do DailyBetter" width="1080" height="1920"
                 loading="lazy"></div>
           </article>
           <article class="feature-panel overflow-hidden rounded-[28px] bg-[#F9E8C9] px-6 pt-8 sm:px-8 sm:pt-10 lg:px-10">
-            <h3 class="text-[1.75rem] font-black leading-tight tracking-[-.025em] sm:text-3xl">Perceba seu próprio ritmo.</h3>
-            <p class="mt-3 max-w-md leading-relaxed text-[#6C5634]">Gráficos semanais, mensais e um histórico visual
-              ajudam a observar como seu humor varia.</p>
+            <h3 class="text-[1.75rem] font-black leading-tight tracking-[-.025em] sm:text-3xl">Gráficos e estatísticas</h3>
+            <p class="mt-3 max-w-md leading-relaxed text-[#6C5634]">Gráficos semanais e mensais e um histórico em cores
+              mostram como seu humor varia ao longo do tempo.</p>
             <div class="phone mx-auto mt-9 w-[230px] translate-y-5 sm:w-[260px]"><img
                 src="assets/screens/estatisticas.png" alt="Estatísticas semanais com gráfico de humor" width="1080"
                 height="1920" loading="lazy"></div>
@@ -282,19 +339,18 @@
         </div>
         <div class="mt-12 grid gap-8 border-t border-ink/15 pt-9 md:grid-cols-3">
           <article>
-            <h3 class="text-xl font-black">Uma nota para lembrar</h3>
-            <p class="mt-3 leading-relaxed text-muted">O que aconteceu e o que fez diferença. Dê palavras aos momentos
-              que quiser guardar.</p>
+            <h3 class="text-xl font-black">Notas</h3>
+            <p class="mt-3 leading-relaxed text-muted">Escreva o que aconteceu e o que fez diferença no seu dia, com as
+              palavras que quiser.</p>
           </article>
           <article>
-            <h3 class="text-xl font-black">Contexto para entender</h3>
-            <p class="mt-3 leading-relaxed text-muted">Atividades, sono e energia ajudam a contar o que uma carinha
-              sozinha não diz.</p>
+            <h3 class="text-xl font-black">Atividades, sono e energia</h3>
+            <p class="mt-3 leading-relaxed text-muted">Registre o contexto do dia para entender o que uma carinha
+              sozinha não explica.</p>
           </article>
           <article>
-            <h3 class="text-xl font-black">Lembretes no seu horário</h3>
-            <p class="mt-3 leading-relaxed text-muted">Escolha quando receber um convite para fazer uma pausa e
-              registrar o dia.</p>
+            <h3 class="text-xl font-black">Lembretes</h3>
+            <p class="mt-3 leading-relaxed text-muted">Escolha o horário e receba um aviso para fazer seu registro.</p>
           </article>
         </div>
       </div>
@@ -304,17 +360,20 @@
       aria-labelledby="theme-title">
       <div class="wrap grid items-center gap-12 md:grid-cols-[1fr_.85fr] md:gap-10 lg:gap-24">
         <div>
-          <h2 id="theme-title" class="section-title">Bom de olhar.<br><span class="text-brand">Fácil de usar.</span>
+          <h2 id="theme-title" class="section-title">Tema claro ou escuro.<br><span class="text-brand">Você
+              escolhe.</span>
           </h2>
-          <p class="mt-6 max-w-lg text-lg leading-relaxed text-[#BCC0B3]">Carinhas que você reconhece, um calendário
-            simples e espaço para respirar. Escolha o tema que combina com o seu momento.</p>
+          <p class="mt-6 max-w-lg text-lg leading-relaxed text-[#BCC0B3]">Uma interface simples, com carinhas fáceis de
+            reconhecer. Use o tema escuro à noite e o claro durante o dia, ou o que preferir.</p>
           <div class="mt-8 inline-flex rounded-full border border-white/20 p-1" role="group"
             aria-label="Escolha o tema da prévia"><button class="theme-button" type="button" data-theme="light"
-              aria-pressed="false">Tema claro</button><button class="theme-button" type="button" data-theme="dark"
-              aria-pressed="true">Tema escuro</button></div>
+              aria-pressed="false" data-src="assets/screens/inicio.png" data-alt="Tela inicial no tema claro"
+              data-status="Prévia do tema claro.">Tema claro</button><button class="theme-button" type="button"
+              data-theme="dark" aria-pressed="true" data-src="assets/screens/modo-escuro.png"
+              data-alt="Tela inicial no tema escuro" data-status="Prévia do tema escuro.">Tema escuro</button></div>
           <p id="theme-status" class="mt-4 text-sm text-[#BCC0B3]" aria-live="polite">Prévia do tema escuro.</p><a
-            href="#telas" class="mt-10 inline-flex min-h-12 items-center gap-3 font-extrabold text-brand">Explore mais
-            telas<svg class="size-5" aria-hidden="true">
+            href="#telas" class="mt-10 inline-flex min-h-12 items-center gap-3 font-extrabold text-brand">Ver mais
+            telas do app<svg class="size-5" aria-hidden="true">
               <use href="#arrow" />
             </svg></a>
         </div>
@@ -332,8 +391,8 @@
     <section id="telas" class="py-20 lg:py-28" aria-labelledby="screens-title">
       <div class="wrap mb-10 flex items-end justify-between gap-5">
         <div>
-          <h2 id="screens-title" class="section-title">Conheça seu próximo diário.</h2>
-          <p class="mt-5 max-w-xl text-lg text-muted">Telas reais do DailyBetter, com registros demonstrativos.<span class="sm:hidden"> Deslize para ver mais.</span></p>
+          <h2 id="screens-title" class="section-title">Veja o app por dentro.</h2>
+          <p class="mt-5 max-w-xl text-lg text-muted">Telas reais do DailyBetter, com registros de exemplo.<span class="sm:hidden"> Deslize para ver mais.</span></p>
         </div>
         <div class="hidden shrink-0 gap-2 sm:flex"><button id="gallery-prev" type="button"
             class="grid size-12 place-items-center rounded-full border border-ink/20 disabled:opacity-30"
@@ -349,28 +408,28 @@
         class="gallery-track flex snap-x snap-mandatory gap-4 overflow-x-auto pb-6 text-center sm:gap-6">
         <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
           <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="assets/screens/registrar.png"
-              alt="Registro com escolha de humor e campo de nota" width="1080" height="1920" loading="lazy"></div>
-          <figcaption class="mt-4 font-extrabold">Um momento para você</figcaption>
+              alt="Novo registro com escolha de humor e campo de nota" width="1080" height="1920" loading="lazy"></div>
+          <figcaption class="mt-4 font-extrabold">Novo registro</figcaption>
         </figure>
         <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
           <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="assets/screens/registros.png"
-              alt="Histórico com notas, atividades e humores" width="1080" height="1920" loading="lazy"></div>
-          <figcaption class="mt-4 font-extrabold">Memórias com contexto</figcaption>
+              alt="Lista de registros com notas, atividades e humores" width="1080" height="1920" loading="lazy"></div>
+          <figcaption class="mt-4 font-extrabold">Seus registros</figcaption>
         </figure>
         <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
           <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="assets/screens/historico.png"
               alt="Mapa visual dos registros de humor" width="1080" height="1920" loading="lazy"></div>
-          <figcaption class="mt-4 font-extrabold">Sua história em cores</figcaption>
+          <figcaption class="mt-4 font-extrabold">Histórico em cores</figcaption>
         </figure>
         <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
           <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="assets/screens/conquistas.png"
               alt="Conquistas por manter o hábito de registrar" width="1080" height="1920" loading="lazy"></div>
-          <figcaption class="mt-4 font-extrabold">Pequenas conquistas</figcaption>
+          <figcaption class="mt-4 font-extrabold">Conquistas</figcaption>
         </figure>
         <figure class="w-[min(230px,68vw)] shrink-0 snap-start sm:w-[258px]">
           <div class="overflow-hidden rounded-[22px] border border-ink/15"><img src="assets/screens/modo-escuro.png"
-              alt="Diário com aparência escura" width="1080" height="1920" loading="lazy"></div>
-          <figcaption class="mt-4 font-extrabold">No seu momento</figcaption>
+              alt="Tela inicial no tema escuro" width="1080" height="1920" loading="lazy"></div>
+          <figcaption class="mt-4 font-extrabold">Tema escuro</figcaption>
         </figure>
       </div>
     </section>
@@ -380,10 +439,10 @@
         <div><svg class="mb-6 size-10 text-honey" aria-hidden="true">
             <use href="#lock" />
           </svg>
-          <h2 id="privacy-title" class="section-title">Seu diário.<br>Seu espaço.</h2>
-          <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted">Seus registros de humor ficam no aparelho. Você
-            decide o que escrever, o que guardar e quando exportar um backup.</p><a href="privacy.html"
-            class="mt-8 inline-flex min-h-12 items-center gap-2 font-extrabold text-honey">Ler Política de
+          <h2 id="privacy-title" class="section-title">Seu diário fica<br>no seu celular.</h2>
+          <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted">Os registros são salvos no aparelho, não em
+            servidores do DailyBetter. Ninguém além de você lê o que você escreve.</p><a href="privacy.html"
+            class="mt-8 inline-flex min-h-12 items-center gap-2 font-extrabold text-honey">Ler a Política de
             Privacidade<svg class="size-5" aria-hidden="true">
               <use href="#arrow" />
             </svg></a>
@@ -391,16 +450,16 @@
         <dl class="divide-y divide-ink/15 self-center">
           <div class="py-5">
             <dt class="text-xl font-extrabold">Sem criar conta</dt>
-            <dd class="mt-2 text-muted">Abra o app e comece pelo que está sentindo.</dd>
+            <dd class="mt-2 text-muted">Sem cadastro, e-mail ou senha. Abra o app e faça seu primeiro registro.</dd>
           </div>
           <div class="py-5">
-            <dt class="text-xl font-extrabold">Backup sob seu controle</dt>
-            <dd class="mt-2 text-muted">Exporte um arquivo e escolha onde salvá-lo, inclusive no Google Drive. Com o
-              backup do Google ativo, o Android também pode levar seu diário para um celular novo.</dd>
+            <dt class="text-xl font-extrabold">Backup quando você quiser</dt>
+            <dd class="mt-2 text-muted">Exporte um arquivo de backup e salve onde preferir, como no Google Drive. Para
+              restaurar, é só importar o arquivo.</dd>
           </div>
           <div class="py-5">
-            <dt class="text-xl font-extrabold">Liberdade para revisitar</dt>
-            <dd class="mt-2 text-muted">Consulte, edite ou apague seus registros diretamente no app.</dd>
+            <dt class="text-xl font-extrabold">Você no controle</dt>
+            <dd class="mt-2 text-muted">Edite ou apague qualquer registro direto no app, quando quiser.</dd>
           </div>
         </dl>
       </div>
@@ -409,44 +468,50 @@
     <section id="duvidas" class="py-20 lg:py-28" aria-labelledby="faq-title">
       <div class="wrap grid gap-10 lg:grid-cols-[.75fr_1.25fr] lg:gap-24">
         <div>
-          <h2 id="faq-title" class="section-title">Antes do<br>primeiro registro.</h2>
-          <p class="mt-6 max-w-sm leading-relaxed text-muted">Algumas respostas para você começar a conhecer o
-            DailyBetter.</p>
+          <h2 id="faq-title" class="section-title">Perguntas<br>frequentes.</h2>
+          <p class="mt-6 max-w-sm leading-relaxed text-muted">Não encontrou sua dúvida? <a href="contact.html"
+              class="font-extrabold text-honey underline underline-offset-4">Fale com a gente</a>.</p>
         </div>
         <div class="border-t border-ink/15">
           <details class="faq-item" open>
-            <summary>Preciso escrever todos os dias?<svg class="faq-plus size-6 shrink-0 transition-transform"
+            <summary>O DailyBetter é gratuito?<svg class="faq-plus size-6 shrink-0 transition-transform"
                 aria-hidden="true">
                 <use href="#plus" />
               </svg></summary>
-            <p>Não. Você pode registrar quando fizer sentido. A frequência ajuda a visualizar padrões, mas não existe
-              obrigação de preencher todos os dias.</p>
+            <p>Sim. O app é gratuito, exibe anúncios e não tem assinatura.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Preciso registrar todos os dias?<svg class="faq-plus size-6 shrink-0 transition-transform"
+                aria-hidden="true">
+                <use href="#plus" />
+              </svg></summary>
+            <p>Não. Registre quando fizer sentido. Quanto mais registros, mais fácil enxergar padrões, mas não existe
+              meta diária nem penalidade por pular um dia.</p>
           </details>
           <details class="faq-item">
             <summary>Posso registrar só o humor?<svg class="faq-plus size-6 shrink-0 transition-transform"
                 aria-hidden="true">
                 <use href="#plus" />
               </svg></summary>
-            <p>Sim. Escolher uma carinha já é suficiente. Nota, atividades, sono, energia e outros detalhes são
-              opcionais.</p>
+            <p>Sim. Escolher uma carinha já é um registro completo. Nota, atividades, sono e energia são opcionais.</p>
           </details>
           <details class="faq-item">
             <summary>E se eu trocar de celular?<svg class="faq-plus size-6 shrink-0 transition-transform"
                 aria-hidden="true">
                 <use href="#plus" />
               </svg></summary>
-            <p>O diário é armazenado no aparelho, sem conta nem servidores do DailyBetter, e não há sincronização
-              contínua na nuvem. Se o backup do Google estiver ativo no seu celular, o Android pode incluí-lo na cópia de
-              segurança e restaurá-lo ao configurar um aparelho novo. Para garantir, use também a função de exportar
-              backup do app.</p>
+            <p>Exporte um backup pelo app e guarde o arquivo onde preferir, como no Google Drive. No celular novo,
+              instale o DailyBetter e importe esse arquivo. Se o backup do Google estiver ativo no Android, o sistema
+              também pode restaurar o app automaticamente. <a href="blog/backup-e-troca-de-celular.html"
+                class="font-extrabold text-honey underline underline-offset-4">Veja o passo a passo</a>.</p>
           </details>
           <details class="faq-item">
             <summary>O app faz diagnóstico?<svg class="faq-plus size-6 shrink-0 transition-transform"
                 aria-hidden="true">
                 <use href="#plus" />
               </svg></summary>
-            <p>Não. O DailyBetter é um diário de observação pessoal. Seus gráficos ajudam a acompanhar registros; não
-              substituem avaliação ou orientação profissional.</p>
+            <p>Não. O DailyBetter é um diário para observação pessoal. Os gráficos mostram apenas o que você registrou e
+              não substituem avaliação ou orientação profissional.</p>
           </details>
         </div>
       </div>
@@ -459,16 +524,16 @@
             class="size-14 -rotate-12 sm:size-16" src="assets/moods/good.png" alt="" width="64" height="64"><img
             class="size-16 sm:size-20" src="assets/moods/excellent.png" alt="" width="80" height="80"><img
             class="size-14 rotate-12 sm:size-16" src="assets/moods/neutral.png" alt="" width="64" height="64"></div>
-        <h2 id="download-title" class="section-title mx-auto max-w-3xl">Hoje já é um bom dia<br>para se escutar.</h2>
-        <p class="mx-auto mt-6 max-w-lg text-lg leading-relaxed text-[#674600]">Leve um pouco mais de atenção para os
-          seus dias. Comece com uma carinha. O resto vem no seu tempo.</p><a
+        <h2 id="download-title" class="section-title mx-auto max-w-3xl">Comece hoje.<br>Basta uma carinha.</h2>
+        <p class="mx-auto mt-6 max-w-lg text-lg leading-relaxed text-[#674600]">Baixe o DailyBetter, registre como você
+          está agora e veja seus dias ganharem forma.</p><a
           href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank"
           rel="noopener noreferrer" class="button-dark mt-8"><svg class="size-6" aria-hidden="true">
             <use href="#play" />
-          </svg>Ver no Google Play<svg class="size-5" aria-hidden="true">
+          </svg>Baixar no Google Play<svg class="size-5" aria-hidden="true">
             <use href="#arrow" />
           </svg></a>
-        <p class="mt-4 text-xs font-bold text-[#674600]">Para Android</p>
+        <p class="mt-4 text-xs font-bold text-[#674600]">Grátis para Android · Sem criar conta</p>
       </div>
     </section>
   </main>
@@ -478,22 +543,23 @@
       <div class="footer-top">
         <div class="footer-brand">
           <a class="brand-logo" href="#inicio" aria-label="DailyBetter, página inicial"><img src="assets/moods/excellent.png" alt="" width="36" height="36"><span>Daily<em>Better</em></span></a>
-          <p class="footer-tagline">Um espaço para todos os seus dias. Registre seu humor e conheça melhor o seu ritmo.</p>
-          <a class="footer-store" href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 15 9-15 9V3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m5 3 10 12m-10 6 10-12" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>Ver no Google Play</a>
+          <p class="footer-tagline">Diário de humor grátis para Android. Um espaço para todos os seus dias.</p>
+          <a class="footer-store" href="https://play.google.com/store/apps/details?id=com.iflag.dailybetter_mood_tracker" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 15 9-15 9V3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m5 3 10 12m-10 6 10-12" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>Baixar no Google Play</a>
         </div>
         <div class="footer-columns">
           <nav class="footer-column" aria-labelledby="footer-produto">
             <h2 id="footer-produto">Produto</h2>
             <ul>
               <li><a href="#como-funciona">Como funciona</a></li>
-              <li><a href="#seus-dias">Por dentro do app</a></li>
+              <li><a href="#recursos">Recursos</a></li>
               <li><a href="#telas">Telas</a></li>
+              <li><a href="blog/index.html">Blog</a></li>
             </ul>
           </nav>
           <nav class="footer-column" aria-labelledby="footer-suporte">
             <h2 id="footer-suporte">Suporte</h2>
             <ul>
-              <li><a href="#duvidas">Dúvidas</a></li>
+              <li><a href="#duvidas">Perguntas frequentes</a></li>
               <li><a href="contact.html">Contato</a></li>
               <li><a href="mailto:iflagdev@gmail.com">E-mail</a></li>
             </ul>
@@ -509,7 +575,7 @@
       </div>
       <div class="footer-bottom">
         <p>© 2026 DailyBetter. Todos os direitos reservados.</p>
-        <p>Desenvolvido por iFlag</p>
+        <p><a class="footer-lang" href="en/index.html" hreflang="en" lang="en">English</a> · Desenvolvido por iFlag</p>
       </div>
     </div>
   </footer>

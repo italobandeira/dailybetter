@@ -129,6 +129,16 @@
   margin: 0;
 }
 
+.footer-bottom a {
+  color: inherit;
+  font-weight: 800;
+  text-underline-offset: 0.18em;
+}
+
+.footer-bottom a:hover {
+  color: #805300;
+}
+
 @media (min-width: 640px) {
   .footer-inner {
     width: min(1200px, calc(100% - 4rem));

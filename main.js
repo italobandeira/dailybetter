@@ -14,14 +14,14 @@
     menu.hidden = true;
     menu.classList.add('hidden');
     menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.setAttribute('aria-label', 'Abrir menu');
+    menuButton.setAttribute('aria-label', menuButton.dataset.labelOpen);
   };
   menuButton.addEventListener('click', () => {
     const open = menuButton.getAttribute('aria-expanded') !== 'true';
     menu.hidden = !open;
     menu.classList.toggle('hidden', !open);
     menuButton.setAttribute('aria-expanded', String(open));
-    menuButton.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    menuButton.setAttribute('aria-label', open ? menuButton.dataset.labelClose : menuButton.dataset.labelOpen);
     if (open) feedback(menu, { y: -8, opacity: 0.5 });
   });
   menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
@@ -35,29 +35,22 @@
   desktop.addEventListener('change', event => { if (event.matches) closeMenu(); });
 
   // This demo stays in memory. No mood choice is stored or transmitted.
-  const messages = {
-    Excelente: 'Um momento para celebrar. O que fez seu dia brilhar?',
-    Bom: 'Que bom. Guarde um pouco desse momento.',
-    Neutro: 'Dias tranquilos também fazem parte da sua história.',
-    Ruim: 'Dias difíceis também têm espaço aqui.',
-    Péssimo: 'Você pode começar só com essa carinha. Sem precisar explicar.'
-  };
+  // Visible texts live in the HTML (data-*) so each language page carries its own copy.
   const moodButtons = [...document.querySelectorAll('[data-mood]')];
   moodButtons.forEach(button => button.addEventListener('click', () => {
     moodButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-    document.querySelector('.mood-response').textContent = messages[button.dataset.mood];
+    document.querySelector('.mood-response').textContent = button.dataset.message;
     feedback(button.querySelector('img'), { y: -8, scale: 1.15, rotation: -10 });
     feedback('.mood-response', { y: 6, opacity: 0.45 });
   }));
 
   const themeButtons = [...document.querySelectorAll('[data-theme]')];
   themeButtons.forEach(button => button.addEventListener('click', () => {
-    const dark = button.dataset.theme === 'dark';
     themeButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
     const preview = document.querySelector('#theme-screen');
-    preview.src = dark ? 'assets/screens/modo-escuro.png' : 'assets/screens/inicio.png';
-    preview.alt = dark ? 'Tela inicial no tema escuro' : 'Tela inicial no tema claro';
-    document.querySelector('#theme-status').textContent = dark ? 'Prévia do tema escuro.' : 'Prévia do tema claro.';
+    preview.src = button.dataset.src;
+    preview.alt = button.dataset.alt;
+    document.querySelector('#theme-status').textContent = button.dataset.status;
     feedback(preview, { scale: 0.97, opacity: 0.45 });
   }));
 

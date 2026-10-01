@@ -141,6 +141,12 @@ svg {
   color: #fff;
 }
 
+.header-nav .lang-link {
+  border: 1px solid var(--line);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
 .legal-hero {
   overflow: hidden;
   padding: 72px 0 64px;
@@ -415,7 +421,7 @@ svg {
     min-height: 70px;
   }
 
-  .header-nav a:not([aria-current="page"]):not(.home-link) {
+  .header-nav a:not([aria-current="page"]):not(.home-link):not(.lang-link) {
     display: none;
   }
 
